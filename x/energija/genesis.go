@@ -13,6 +13,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.SmartMeterList {
 		k.SetSmartMeter(ctx, elem)
 	}
+	// Set all the energyStore
+	for _, elem := range genState.EnergyStoreList {
+		k.SetEnergyStore(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 }
 
@@ -21,6 +25,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis := types.DefaultGenesis()
 
 	genesis.SmartMeterList = k.GetAllSmartMeter(ctx)
+	genesis.EnergyStoreList = k.GetAllEnergyStore(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

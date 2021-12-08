@@ -29,6 +29,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				EnergyStoreList: []types.EnergyStore{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -37,6 +45,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated smartMeter",
 			genState: &types.GenesisState{
 				SmartMeterList: []types.SmartMeter{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated energyStore",
+			genState: &types.GenesisState{
+				EnergyStoreList: []types.EnergyStore{
 					{
 						Index: "0",
 					},

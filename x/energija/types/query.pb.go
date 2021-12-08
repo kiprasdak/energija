@@ -214,45 +214,241 @@ func (m *QueryAllSmartMeterResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
+type QueryGetEnergyStoreRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (m *QueryGetEnergyStoreRequest) Reset()         { *m = QueryGetEnergyStoreRequest{} }
+func (m *QueryGetEnergyStoreRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetEnergyStoreRequest) ProtoMessage()    {}
+func (*QueryGetEnergyStoreRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_540960966f5201b1, []int{4}
+}
+func (m *QueryGetEnergyStoreRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetEnergyStoreRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetEnergyStoreRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetEnergyStoreRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetEnergyStoreRequest.Merge(m, src)
+}
+func (m *QueryGetEnergyStoreRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetEnergyStoreRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetEnergyStoreRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetEnergyStoreRequest proto.InternalMessageInfo
+
+func (m *QueryGetEnergyStoreRequest) GetIndex() string {
+	if m != nil {
+		return m.Index
+	}
+	return ""
+}
+
+type QueryGetEnergyStoreResponse struct {
+	EnergyStore EnergyStore `protobuf:"bytes,1,opt,name=energyStore,proto3" json:"energyStore"`
+}
+
+func (m *QueryGetEnergyStoreResponse) Reset()         { *m = QueryGetEnergyStoreResponse{} }
+func (m *QueryGetEnergyStoreResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetEnergyStoreResponse) ProtoMessage()    {}
+func (*QueryGetEnergyStoreResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_540960966f5201b1, []int{5}
+}
+func (m *QueryGetEnergyStoreResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetEnergyStoreResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetEnergyStoreResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetEnergyStoreResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetEnergyStoreResponse.Merge(m, src)
+}
+func (m *QueryGetEnergyStoreResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetEnergyStoreResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetEnergyStoreResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetEnergyStoreResponse proto.InternalMessageInfo
+
+func (m *QueryGetEnergyStoreResponse) GetEnergyStore() EnergyStore {
+	if m != nil {
+		return m.EnergyStore
+	}
+	return EnergyStore{}
+}
+
+type QueryAllEnergyStoreRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllEnergyStoreRequest) Reset()         { *m = QueryAllEnergyStoreRequest{} }
+func (m *QueryAllEnergyStoreRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllEnergyStoreRequest) ProtoMessage()    {}
+func (*QueryAllEnergyStoreRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_540960966f5201b1, []int{6}
+}
+func (m *QueryAllEnergyStoreRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllEnergyStoreRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllEnergyStoreRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllEnergyStoreRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllEnergyStoreRequest.Merge(m, src)
+}
+func (m *QueryAllEnergyStoreRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllEnergyStoreRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllEnergyStoreRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllEnergyStoreRequest proto.InternalMessageInfo
+
+func (m *QueryAllEnergyStoreRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllEnergyStoreResponse struct {
+	EnergyStore []EnergyStore       `protobuf:"bytes,1,rep,name=energyStore,proto3" json:"energyStore"`
+	Pagination  *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllEnergyStoreResponse) Reset()         { *m = QueryAllEnergyStoreResponse{} }
+func (m *QueryAllEnergyStoreResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllEnergyStoreResponse) ProtoMessage()    {}
+func (*QueryAllEnergyStoreResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_540960966f5201b1, []int{7}
+}
+func (m *QueryAllEnergyStoreResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllEnergyStoreResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllEnergyStoreResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllEnergyStoreResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllEnergyStoreResponse.Merge(m, src)
+}
+func (m *QueryAllEnergyStoreResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllEnergyStoreResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllEnergyStoreResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllEnergyStoreResponse proto.InternalMessageInfo
+
+func (m *QueryAllEnergyStoreResponse) GetEnergyStore() []EnergyStore {
+	if m != nil {
+		return m.EnergyStore
+	}
+	return nil
+}
+
+func (m *QueryAllEnergyStoreResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryGetSmartMeterRequest)(nil), "kiprasdak.energija.energija.QueryGetSmartMeterRequest")
 	proto.RegisterType((*QueryGetSmartMeterResponse)(nil), "kiprasdak.energija.energija.QueryGetSmartMeterResponse")
 	proto.RegisterType((*QueryAllSmartMeterRequest)(nil), "kiprasdak.energija.energija.QueryAllSmartMeterRequest")
 	proto.RegisterType((*QueryAllSmartMeterResponse)(nil), "kiprasdak.energija.energija.QueryAllSmartMeterResponse")
+	proto.RegisterType((*QueryGetEnergyStoreRequest)(nil), "kiprasdak.energija.energija.QueryGetEnergyStoreRequest")
+	proto.RegisterType((*QueryGetEnergyStoreResponse)(nil), "kiprasdak.energija.energija.QueryGetEnergyStoreResponse")
+	proto.RegisterType((*QueryAllEnergyStoreRequest)(nil), "kiprasdak.energija.energija.QueryAllEnergyStoreRequest")
+	proto.RegisterType((*QueryAllEnergyStoreResponse)(nil), "kiprasdak.energija.energija.QueryAllEnergyStoreResponse")
 }
 
 func init() { proto.RegisterFile("energija/query.proto", fileDescriptor_540960966f5201b1) }
 
 var fileDescriptor_540960966f5201b1 = []byte{
-	// 435 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x93, 0x3f, 0xce, 0xd3, 0x30,
-	0x18, 0xc6, 0xe3, 0xc2, 0x87, 0x84, 0x11, 0x8b, 0xd5, 0x01, 0x02, 0x0a, 0x28, 0x03, 0x05, 0x06,
-	0x5b, 0x29, 0x12, 0x9d, 0xdb, 0x81, 0xb2, 0x54, 0x82, 0xb0, 0xb1, 0x20, 0xa7, 0xb5, 0x4c, 0x68,
-	0x12, 0xa7, 0xb1, 0x8b, 0x5a, 0x21, 0x16, 0x4e, 0x80, 0xc4, 0x49, 0x90, 0x10, 0x67, 0xe8, 0x58,
-	0x89, 0x85, 0x09, 0xa1, 0x96, 0x23, 0x70, 0x00, 0x14, 0xdb, 0x24, 0x2d, 0xa4, 0xa5, 0xe8, 0xdb,
-	0xde, 0xd8, 0x7e, 0x9e, 0xf7, 0xf7, 0xfe, 0x09, 0x6c, 0xb3, 0x8c, 0x15, 0x3c, 0x7e, 0x45, 0xc9,
-	0x6c, 0xce, 0x8a, 0x25, 0xce, 0x0b, 0xa1, 0x04, 0xba, 0x31, 0x8d, 0xf3, 0x82, 0xca, 0x09, 0x9d,
-	0xe2, 0xdf, 0xf7, 0x55, 0xe0, 0xde, 0xe4, 0x42, 0xf0, 0x84, 0x11, 0x9a, 0xc7, 0x84, 0x66, 0x99,
-	0x50, 0x54, 0xc5, 0x22, 0x93, 0x46, 0xea, 0xde, 0x1f, 0x0b, 0x99, 0x0a, 0x49, 0x22, 0x2a, 0x99,
-	0xf1, 0x24, 0xaf, 0x83, 0x88, 0x29, 0x1a, 0x90, 0x9c, 0xf2, 0x38, 0xd3, 0x8f, 0xed, 0x5b, 0xb7,
-	0x4a, 0x2e, 0x53, 0x5a, 0xa8, 0x17, 0x29, 0x53, 0xac, 0xb0, 0x77, 0x6d, 0x2e, 0xb8, 0xd0, 0x21,
-	0x29, 0x23, 0x73, 0xea, 0x07, 0xf0, 0xfa, 0xd3, 0xd2, 0x73, 0xc8, 0xd4, 0xb3, 0x52, 0x32, 0x2a,
-	0x15, 0x21, 0x9b, 0xcd, 0x99, 0x54, 0xa8, 0x0d, 0xcf, 0xe2, 0x6c, 0xc2, 0x16, 0xd7, 0xc0, 0x6d,
-	0x70, 0xf7, 0x72, 0x68, 0x3e, 0xfc, 0x29, 0x74, 0x9b, 0x24, 0x32, 0x17, 0x99, 0x64, 0x68, 0x04,
-	0xa1, 0xac, 0x4e, 0xb5, 0xf0, 0x4a, 0xb7, 0x83, 0x8f, 0x94, 0x8f, 0x6b, 0x93, 0xc1, 0xc5, 0xd5,
-	0xb7, 0x5b, 0x4e, 0xb8, 0x63, 0xe0, 0x8f, 0x2d, 0x5f, 0x3f, 0x49, 0xfe, 0xe6, 0x7b, 0x04, 0x61,
-	0xdd, 0x02, 0x9b, 0xeb, 0x0e, 0x36, 0xfd, 0xc2, 0x65, 0xbf, 0xb0, 0x99, 0x81, 0xed, 0x17, 0x7e,
-	0x42, 0x39, 0xb3, 0xda, 0x70, 0x47, 0xe9, 0x7f, 0x02, 0xb6, 0xa4, 0x3f, 0xb2, 0x1c, 0x28, 0xe9,
-	0xc2, 0xb9, 0x4a, 0x42, 0xc3, 0x3d, 0xea, 0x96, 0xed, 0xd0, 0xbf, 0xa8, 0x0d, 0xcb, 0x2e, 0x76,
-	0xf7, 0x67, 0x0b, 0x9e, 0x69, 0x6c, 0xf4, 0x19, 0x40, 0x58, 0xe7, 0x44, 0x0f, 0x8f, 0xc2, 0x1d,
-	0x9c, 0xb7, 0xdb, 0xfb, 0x6f, 0x9d, 0xa1, 0xf2, 0x7b, 0xef, 0xbe, 0xfc, 0xf8, 0xd0, 0x0a, 0x10,
-	0x21, 0x95, 0x01, 0xa9, 0x56, 0x71, 0x7f, 0x27, 0xb5, 0x90, 0xbc, 0xd1, 0xab, 0xf4, 0x16, 0x7d,
-	0x04, 0xf0, 0x6a, 0xed, 0xd7, 0x4f, 0x92, 0x53, 0xd8, 0x9b, 0x76, 0xe1, 0x14, 0xf6, 0xc6, 0xe9,
-	0xfa, 0x44, 0xb3, 0xdf, 0x43, 0x9d, 0x13, 0xd9, 0x07, 0x8f, 0x57, 0x1b, 0x0f, 0xac, 0x37, 0x1e,
-	0xf8, 0xbe, 0xf1, 0xc0, 0xfb, 0xad, 0xe7, 0xac, 0xb7, 0x9e, 0xf3, 0x75, 0xeb, 0x39, 0xcf, 0x31,
-	0x8f, 0xd5, 0xcb, 0x79, 0x84, 0xc7, 0x22, 0x6d, 0x32, 0x5b, 0xd4, 0xa1, 0x5a, 0xe6, 0x4c, 0x46,
-	0x97, 0xf4, 0x3f, 0xf8, 0xe0, 0x57, 0x00, 0x00, 0x00, 0xff, 0xff, 0x06, 0xa0, 0x36, 0x1b, 0x34,
-	0x04, 0x00, 0x00,
+	// 567 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x95, 0xc1, 0x6f, 0xd3, 0x3e,
+	0x14, 0xc7, 0xeb, 0xed, 0xd7, 0x9f, 0x84, 0x2b, 0x38, 0x58, 0x3d, 0x40, 0x8a, 0x02, 0xca, 0x81,
+	0x95, 0x1d, 0xec, 0xb5, 0x48, 0x6c, 0xd7, 0x4d, 0x82, 0x71, 0x99, 0x34, 0xba, 0x1b, 0x97, 0xc9,
+	0x6d, 0x9f, 0x42, 0x68, 0x1a, 0x67, 0xb1, 0x8b, 0x56, 0x21, 0x2e, 0xfc, 0x05, 0x48, 0xfc, 0x25,
+	0x48, 0x80, 0x10, 0x7f, 0xc1, 0x8e, 0x93, 0xb8, 0x70, 0x42, 0xa8, 0xe5, 0xc2, 0x7f, 0x81, 0xe2,
+	0x98, 0x24, 0xdd, 0xd2, 0x90, 0xb1, 0xdd, 0x5e, 0xed, 0xbc, 0xef, 0xfb, 0xbc, 0xef, 0xb3, 0x5d,
+	0xdc, 0x84, 0x00, 0x22, 0xd7, 0x7b, 0xc1, 0xd9, 0xd1, 0x04, 0xa2, 0x29, 0x0d, 0x23, 0xa1, 0x04,
+	0x69, 0x8d, 0xbc, 0x30, 0xe2, 0x72, 0xc8, 0x47, 0xf4, 0xcf, 0x7e, 0x1a, 0x58, 0xb7, 0x5d, 0x21,
+	0x5c, 0x1f, 0x18, 0x0f, 0x3d, 0xc6, 0x83, 0x40, 0x28, 0xae, 0x3c, 0x11, 0xc8, 0x24, 0xd5, 0x5a,
+	0x1f, 0x08, 0x39, 0x16, 0x92, 0xf5, 0xb9, 0x84, 0x44, 0x93, 0xbd, 0xec, 0xf4, 0x41, 0xf1, 0x0e,
+	0x0b, 0xb9, 0xeb, 0x05, 0xfa, 0x63, 0xf3, 0xad, 0x95, 0x16, 0x97, 0x63, 0x1e, 0xa9, 0xc3, 0x31,
+	0x28, 0x88, 0xcc, 0x5e, 0x2b, 0xdd, 0xd3, 0xc1, 0xf4, 0x50, 0x2a, 0x11, 0x81, 0xd9, 0x6c, 0xba,
+	0xc2, 0x15, 0x3a, 0x64, 0x71, 0x94, 0xac, 0x3a, 0x1d, 0x7c, 0xeb, 0x69, 0x5c, 0x70, 0x17, 0xd4,
+	0x41, 0xac, 0xb7, 0x17, 0xcb, 0xf5, 0xe0, 0x68, 0x02, 0x52, 0x91, 0x26, 0xae, 0x7b, 0xc1, 0x10,
+	0x8e, 0x6f, 0xa2, 0xbb, 0xa8, 0x7d, 0xad, 0x97, 0xfc, 0x70, 0x46, 0xd8, 0x2a, 0x4a, 0x91, 0xa1,
+	0x08, 0x24, 0x90, 0x3d, 0x8c, 0x65, 0xba, 0xaa, 0x13, 0x1b, 0xdd, 0x35, 0x5a, 0xe2, 0x0d, 0xcd,
+	0x44, 0x76, 0xfe, 0x3b, 0xf9, 0x7e, 0xa7, 0xd6, 0xcb, 0x09, 0x38, 0x03, 0xc3, 0xb7, 0xed, 0xfb,
+	0xe7, 0xf9, 0x1e, 0x63, 0x9c, 0xf9, 0x63, 0x6a, 0xdd, 0xa3, 0x89, 0x99, 0x34, 0x36, 0x93, 0x26,
+	0x03, 0x32, 0x66, 0xd2, 0x7d, 0xee, 0x82, 0xc9, 0xed, 0xe5, 0x32, 0x9d, 0x0f, 0xc8, 0xb4, 0x74,
+	0xa6, 0xca, 0x92, 0x96, 0x56, 0x2f, 0xd5, 0x12, 0xd9, 0x5d, 0xa0, 0x5e, 0x31, 0x0e, 0xfd, 0x8d,
+	0x3a, 0x61, 0x59, 0xc0, 0xee, 0x66, 0x83, 0x78, 0xa4, 0xe7, 0x7d, 0x10, 0x8f, 0xbb, 0x7c, 0x78,
+	0x02, 0xb7, 0x0a, 0x73, 0x4c, 0xab, 0xfb, 0xb8, 0x01, 0xd9, 0xb2, 0xb1, 0xb4, 0x5d, 0xda, 0x6b,
+	0x4e, 0xc6, 0x34, 0x9b, 0x97, 0x70, 0x86, 0x99, 0xb5, 0x05, 0x90, 0x57, 0x35, 0xc1, 0xcf, 0xc8,
+	0xf4, 0x75, 0xb6, 0xcc, 0xb2, 0xbe, 0x56, 0x2f, 0xd9, 0xd7, 0x95, 0x4d, 0xb1, 0xfb, 0xab, 0x8e,
+	0xeb, 0x1a, 0x9d, 0x7c, 0x42, 0x18, 0x67, 0x27, 0x87, 0x3c, 0x2c, 0xc5, 0x5b, 0x7a, 0x6b, 0xad,
+	0xcd, 0x0b, 0xe7, 0x25, 0x54, 0xce, 0xe6, 0x9b, 0xaf, 0x3f, 0xdf, 0xad, 0x74, 0x08, 0x63, 0xa9,
+	0x00, 0x5b, 0x7c, 0x51, 0xd2, 0x67, 0x47, 0x27, 0xb2, 0x57, 0xfa, 0x4c, 0xbd, 0x26, 0xef, 0x11,
+	0xbe, 0x9e, 0xe9, 0x6d, 0xfb, 0x7e, 0x15, 0xf6, 0xa2, 0x1b, 0x5d, 0x85, 0xbd, 0xf0, 0x8e, 0x3a,
+	0x4c, 0xb3, 0xdf, 0x27, 0x6b, 0x15, 0xd9, 0xc9, 0x17, 0x84, 0x1b, 0xb9, 0x11, 0x93, 0x6a, 0xae,
+	0x9d, 0x3f, 0xc2, 0xd6, 0xd6, 0xc5, 0x13, 0x0d, 0xf3, 0x96, 0x66, 0xee, 0x92, 0x8d, 0x52, 0xe6,
+	0xdc, 0xa1, 0x4b, 0x0d, 0xff, 0x88, 0xf0, 0x8d, 0x9c, 0x62, 0xec, 0x78, 0x35, 0xe7, 0xfe, 0x8d,
+	0xbf, 0xf8, 0x52, 0x39, 0x1b, 0x9a, 0x7f, 0x9d, 0xb4, 0xab, 0xf2, 0xef, 0x3c, 0x39, 0x99, 0xd9,
+	0xe8, 0x74, 0x66, 0xa3, 0x1f, 0x33, 0x1b, 0xbd, 0x9d, 0xdb, 0xb5, 0xd3, 0xb9, 0x5d, 0xfb, 0x36,
+	0xb7, 0x6b, 0xcf, 0xa8, 0xeb, 0xa9, 0xe7, 0x93, 0x3e, 0x1d, 0x88, 0x71, 0x91, 0xda, 0x71, 0x16,
+	0xaa, 0x69, 0x08, 0xb2, 0xff, 0xbf, 0xfe, 0xfb, 0x7a, 0xf0, 0x3b, 0x00, 0x00, 0xff, 0xff, 0x3c,
+	0x08, 0x63, 0x4a, 0x8c, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -271,6 +467,10 @@ type QueryClient interface {
 	SmartMeter(ctx context.Context, in *QueryGetSmartMeterRequest, opts ...grpc.CallOption) (*QueryGetSmartMeterResponse, error)
 	// Queries a list of smartMeter items.
 	SmartMeterAll(ctx context.Context, in *QueryAllSmartMeterRequest, opts ...grpc.CallOption) (*QueryAllSmartMeterResponse, error)
+	// Queries a energyStore by index.
+	EnergyStore(ctx context.Context, in *QueryGetEnergyStoreRequest, opts ...grpc.CallOption) (*QueryGetEnergyStoreResponse, error)
+	// Queries a list of energyStore items.
+	EnergyStoreAll(ctx context.Context, in *QueryAllEnergyStoreRequest, opts ...grpc.CallOption) (*QueryAllEnergyStoreResponse, error)
 }
 
 type queryClient struct {
@@ -299,12 +499,34 @@ func (c *queryClient) SmartMeterAll(ctx context.Context, in *QueryAllSmartMeterR
 	return out, nil
 }
 
+func (c *queryClient) EnergyStore(ctx context.Context, in *QueryGetEnergyStoreRequest, opts ...grpc.CallOption) (*QueryGetEnergyStoreResponse, error) {
+	out := new(QueryGetEnergyStoreResponse)
+	err := c.cc.Invoke(ctx, "/kiprasdak.energija.energija.Query/EnergyStore", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) EnergyStoreAll(ctx context.Context, in *QueryAllEnergyStoreRequest, opts ...grpc.CallOption) (*QueryAllEnergyStoreResponse, error) {
+	out := new(QueryAllEnergyStoreResponse)
+	err := c.cc.Invoke(ctx, "/kiprasdak.energija.energija.Query/EnergyStoreAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Queries a smartMeter by index.
 	SmartMeter(context.Context, *QueryGetSmartMeterRequest) (*QueryGetSmartMeterResponse, error)
 	// Queries a list of smartMeter items.
 	SmartMeterAll(context.Context, *QueryAllSmartMeterRequest) (*QueryAllSmartMeterResponse, error)
+	// Queries a energyStore by index.
+	EnergyStore(context.Context, *QueryGetEnergyStoreRequest) (*QueryGetEnergyStoreResponse, error)
+	// Queries a list of energyStore items.
+	EnergyStoreAll(context.Context, *QueryAllEnergyStoreRequest) (*QueryAllEnergyStoreResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -316,6 +538,12 @@ func (*UnimplementedQueryServer) SmartMeter(ctx context.Context, req *QueryGetSm
 }
 func (*UnimplementedQueryServer) SmartMeterAll(ctx context.Context, req *QueryAllSmartMeterRequest) (*QueryAllSmartMeterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SmartMeterAll not implemented")
+}
+func (*UnimplementedQueryServer) EnergyStore(ctx context.Context, req *QueryGetEnergyStoreRequest) (*QueryGetEnergyStoreResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnergyStore not implemented")
+}
+func (*UnimplementedQueryServer) EnergyStoreAll(ctx context.Context, req *QueryAllEnergyStoreRequest) (*QueryAllEnergyStoreResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnergyStoreAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -358,6 +586,42 @@ func _Query_SmartMeterAll_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_EnergyStore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetEnergyStoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).EnergyStore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kiprasdak.energija.energija.Query/EnergyStore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).EnergyStore(ctx, req.(*QueryGetEnergyStoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_EnergyStoreAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllEnergyStoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).EnergyStoreAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kiprasdak.energija.energija.Query/EnergyStoreAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).EnergyStoreAll(ctx, req.(*QueryAllEnergyStoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "kiprasdak.energija.energija.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -369,6 +633,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SmartMeterAll",
 			Handler:    _Query_SmartMeterAll_Handler,
+		},
+		{
+			MethodName: "EnergyStore",
+			Handler:    _Query_EnergyStore_Handler,
+		},
+		{
+			MethodName: "EnergyStoreAll",
+			Handler:    _Query_EnergyStoreAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -522,6 +794,153 @@ func (m *QueryAllSmartMeterResponse) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGetEnergyStoreRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetEnergyStoreRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetEnergyStoreRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetEnergyStoreResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetEnergyStoreResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetEnergyStoreResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.EnergyStore.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllEnergyStoreRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllEnergyStoreRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllEnergyStoreRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllEnergyStoreResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllEnergyStoreResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllEnergyStoreResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.EnergyStore) > 0 {
+		for iNdEx := len(m.EnergyStore) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.EnergyStore[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -578,6 +997,62 @@ func (m *QueryAllSmartMeterResponse) Size() (n int) {
 	_ = l
 	if len(m.SmartMeter) > 0 {
 		for _, e := range m.SmartMeter {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetEnergyStoreRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetEnergyStoreResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.EnergyStore.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllEnergyStoreRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllEnergyStoreResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.EnergyStore) > 0 {
+		for _, e := range m.EnergyStore {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -906,6 +1381,377 @@ func (m *QueryAllSmartMeterResponse) Unmarshal(dAtA []byte) error {
 			}
 			m.SmartMeter = append(m.SmartMeter, SmartMeter{})
 			if err := m.SmartMeter[len(m.SmartMeter)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetEnergyStoreRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetEnergyStoreRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetEnergyStoreRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetEnergyStoreResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetEnergyStoreResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetEnergyStoreResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EnergyStore", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.EnergyStore.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllEnergyStoreRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllEnergyStoreRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllEnergyStoreRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllEnergyStoreResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllEnergyStoreResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllEnergyStoreResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EnergyStore", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.EnergyStore = append(m.EnergyStore, EnergyStore{})
+			if err := m.EnergyStore[len(m.EnergyStore)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

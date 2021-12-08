@@ -4,6 +4,7 @@ package kiprasdak.energija.energija;
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "energija/smart_meter.proto";
+import "energija/energy_store.proto";
 // this line is used by starport scaffolding # 1
 import "gogoproto/gogo.proto";
 
@@ -19,6 +20,16 @@ service Query {
 	// Queries a list of smartMeter items.
 	rpc SmartMeterAll(QueryAllSmartMeterRequest) returns (QueryAllSmartMeterResponse) {
 		option (google.api.http).get = "/kiprasdak/energija/energija/smartMeter";
+	}
+
+// Queries a energyStore by index.
+	rpc EnergyStore(QueryGetEnergyStoreRequest) returns (QueryGetEnergyStoreResponse) {
+		option (google.api.http).get = "/kiprasdak/energija/energija/energyStore/{index}";
+	}
+
+	// Queries a list of energyStore items.
+	rpc EnergyStoreAll(QueryAllEnergyStoreRequest) returns (QueryAllEnergyStoreResponse) {
+		option (google.api.http).get = "/kiprasdak/energija/energija/energyStore";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -39,6 +50,24 @@ message QueryAllSmartMeterRequest {
 
 message QueryAllSmartMeterResponse {
 	repeated SmartMeter smartMeter = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetEnergyStoreRequest {
+	  string index = 1;
+
+}
+
+message QueryGetEnergyStoreResponse {
+	EnergyStore energyStore = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEnergyStoreRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEnergyStoreResponse {
+	repeated EnergyStore energyStore = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
