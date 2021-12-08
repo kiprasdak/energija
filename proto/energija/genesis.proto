@@ -1,11 +1,14 @@
 syntax = "proto3";
 package kiprasdak.energija.energija;
 
+import "energija/smart_meter.proto";
 // this line is used by starport scaffolding # genesis/proto/import
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/kiprasdak/energija/x/energija/types";
 
 // GenesisState defines the energija module's genesis state.
 message GenesisState {
-    // this line is used by starport scaffolding # genesis/proto/state
+    repeated SmartMeter smartMeterList = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
 }

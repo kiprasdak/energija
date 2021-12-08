@@ -1,0 +1,15 @@
+syntax = "proto3";
+package kiprasdak.energija.energija;
+
+option go_package = "github.com/kiprasdak/energija/x/energija/types";
+
+
+
+message SmartMeter {
+  string index = 1; 
+  int32 production = 2; 
+  int32 consumption = 3; 
+  string description = 4; 
+  
+}
+

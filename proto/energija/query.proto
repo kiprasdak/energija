@@ -3,13 +3,43 @@ package kiprasdak.energija.energija;
 
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
+import "energija/smart_meter.proto";
 // this line is used by starport scaffolding # 1
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/kiprasdak/energija/x/energija/types";
 
 // Query defines the gRPC querier service.
 service Query {
-    // this line is used by starport scaffolding # 2
+    // Queries a smartMeter by index.
+	rpc SmartMeter(QueryGetSmartMeterRequest) returns (QueryGetSmartMeterResponse) {
+		option (google.api.http).get = "/kiprasdak/energija/energija/smartMeter/{index}";
+	}
+
+	// Queries a list of smartMeter items.
+	rpc SmartMeterAll(QueryAllSmartMeterRequest) returns (QueryAllSmartMeterResponse) {
+		option (google.api.http).get = "/kiprasdak/energija/energija/smartMeter";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+message QueryGetSmartMeterRequest {
+	  string index = 1;
+
+}
+
+message QueryGetSmartMeterResponse {
+	SmartMeter smartMeter = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSmartMeterRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllSmartMeterResponse {
+	repeated SmartMeter smartMeter = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
