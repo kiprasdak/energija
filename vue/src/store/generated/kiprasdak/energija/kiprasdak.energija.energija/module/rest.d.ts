@@ -8,6 +8,7 @@ export interface EnergijaEnergyStore {
 }
 export declare type EnergijaMsgRegisterEnergyStoreResponse = object;
 export declare type EnergijaMsgRegisterSmartMeterResponse = object;
+export declare type EnergijaMsgTokenizeEnergyResponse = object;
 export interface EnergijaQueryAllEnergyStoreResponse {
     energyStore?: EnergijaEnergyStore[];
     /**

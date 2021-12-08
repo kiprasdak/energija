@@ -14,6 +14,12 @@ export interface MsgRegisterEnergyStore {
 }
 export interface MsgRegisterEnergyStoreResponse {
 }
+export interface MsgTokenizeEnergy {
+    creator: string;
+    amount: number;
+}
+export interface MsgTokenizeEnergyResponse {
+}
 export declare const MsgRegisterSmartMeter: {
     encode(message: MsgRegisterSmartMeter, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgRegisterSmartMeter;
@@ -42,17 +48,33 @@ export declare const MsgRegisterEnergyStoreResponse: {
     toJSON(_: MsgRegisterEnergyStoreResponse): unknown;
     fromPartial(_: DeepPartial<MsgRegisterEnergyStoreResponse>): MsgRegisterEnergyStoreResponse;
 };
+export declare const MsgTokenizeEnergy: {
+    encode(message: MsgTokenizeEnergy, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgTokenizeEnergy;
+    fromJSON(object: any): MsgTokenizeEnergy;
+    toJSON(message: MsgTokenizeEnergy): unknown;
+    fromPartial(object: DeepPartial<MsgTokenizeEnergy>): MsgTokenizeEnergy;
+};
+export declare const MsgTokenizeEnergyResponse: {
+    encode(_: MsgTokenizeEnergyResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgTokenizeEnergyResponse;
+    fromJSON(_: any): MsgTokenizeEnergyResponse;
+    toJSON(_: MsgTokenizeEnergyResponse): unknown;
+    fromPartial(_: DeepPartial<MsgTokenizeEnergyResponse>): MsgTokenizeEnergyResponse;
+};
 /** Msg defines the Msg service. */
 export interface Msg {
     RegisterSmartMeter(request: MsgRegisterSmartMeter): Promise<MsgRegisterSmartMeterResponse>;
-    /** this line is used by starport scaffolding # proto/tx/rpc */
     RegisterEnergyStore(request: MsgRegisterEnergyStore): Promise<MsgRegisterEnergyStoreResponse>;
+    /** this line is used by starport scaffolding # proto/tx/rpc */
+    TokenizeEnergy(request: MsgTokenizeEnergy): Promise<MsgTokenizeEnergyResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
     constructor(rpc: Rpc);
     RegisterSmartMeter(request: MsgRegisterSmartMeter): Promise<MsgRegisterSmartMeterResponse>;
     RegisterEnergyStore(request: MsgRegisterEnergyStore): Promise<MsgRegisterEnergyStoreResponse>;
+    TokenizeEnergy(request: MsgTokenizeEnergy): Promise<MsgTokenizeEnergyResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

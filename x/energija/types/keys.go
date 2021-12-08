@@ -4,6 +4,9 @@ const (
 	// ModuleName defines the module name
 	ModuleName = "energija"
 
+	// TokenDenom defines the token denomination
+	TokenDenom = "watth"
+
 	// StoreKey defines the primary module store key
 	StoreKey = ModuleName
 

@@ -9,6 +9,7 @@ option go_package = "github.com/kiprasdak/energija/x/energija/types";
 service Msg {
       rpc RegisterSmartMeter(MsgRegisterSmartMeter) returns (MsgRegisterSmartMeterResponse);
   rpc RegisterEnergyStore(MsgRegisterEnergyStore) returns (MsgRegisterEnergyStoreResponse);
+  rpc TokenizeEnergy(MsgTokenizeEnergy) returns (MsgTokenizeEnergyResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -28,6 +29,14 @@ message MsgRegisterEnergyStore {
 }
 
 message MsgRegisterEnergyStoreResponse {
+}
+
+message MsgTokenizeEnergy {
+  string creator = 1;
+  int32 amount = 2;
+}
+
+message MsgTokenizeEnergyResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

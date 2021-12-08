@@ -24,6 +24,8 @@ export type EnergijaMsgRegisterEnergyStoreResponse = object;
 
 export type EnergijaMsgRegisterSmartMeterResponse = object;
 
+export type EnergijaMsgTokenizeEnergyResponse = object;
+
 export interface EnergijaQueryAllEnergyStoreResponse {
   energyStore?: EnergijaEnergyStore[];
 

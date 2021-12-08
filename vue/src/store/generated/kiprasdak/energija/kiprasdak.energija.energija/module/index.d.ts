@@ -1,8 +1,9 @@
 import { StdFee } from "@cosmjs/launchpad";
 import { OfflineSigner, EncodeObject } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgRegisterEnergyStore } from "./types/energija/tx";
 import { MsgRegisterSmartMeter } from "./types/energija/tx";
+import { MsgRegisterEnergyStore } from "./types/energija/tx";
+import { MsgTokenizeEnergy } from "./types/energija/tx";
 export declare const MissingWalletError: Error;
 interface TxClientOptions {
     addr: string;
@@ -13,8 +14,9 @@ interface SignAndBroadcastOptions {
 }
 declare const txClient: (wallet: OfflineSigner, { addr: addr }?: TxClientOptions) => Promise<{
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }?: SignAndBroadcastOptions) => Promise<import("@cosmjs/stargate").BroadcastTxResponse>;
-    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore) => EncodeObject;
     msgRegisterSmartMeter: (data: MsgRegisterSmartMeter) => EncodeObject;
+    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore) => EncodeObject;
+    msgTokenizeEnergy: (data: MsgTokenizeEnergy) => EncodeObject;
 }>;
 interface QueryClientOptions {
     addr: string;

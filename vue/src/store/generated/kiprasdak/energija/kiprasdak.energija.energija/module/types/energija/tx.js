@@ -263,6 +263,114 @@ export const MsgRegisterEnergyStoreResponse = {
         return message;
     },
 };
+const baseMsgTokenizeEnergy = { creator: "", amount: 0 };
+export const MsgTokenizeEnergy = {
+    encode(message, writer = Writer.create()) {
+        if (message.creator !== "") {
+            writer.uint32(10).string(message.creator);
+        }
+        if (message.amount !== 0) {
+            writer.uint32(16).int32(message.amount);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseMsgTokenizeEnergy };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.creator = reader.string();
+                    break;
+                case 2:
+                    message.amount = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = { ...baseMsgTokenizeEnergy };
+        if (object.creator !== undefined && object.creator !== null) {
+            message.creator = String(object.creator);
+        }
+        else {
+            message.creator = "";
+        }
+        if (object.amount !== undefined && object.amount !== null) {
+            message.amount = Number(object.amount);
+        }
+        else {
+            message.amount = 0;
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.creator !== undefined && (obj.creator = message.creator);
+        message.amount !== undefined && (obj.amount = message.amount);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = { ...baseMsgTokenizeEnergy };
+        if (object.creator !== undefined && object.creator !== null) {
+            message.creator = object.creator;
+        }
+        else {
+            message.creator = "";
+        }
+        if (object.amount !== undefined && object.amount !== null) {
+            message.amount = object.amount;
+        }
+        else {
+            message.amount = 0;
+        }
+        return message;
+    },
+};
+const baseMsgTokenizeEnergyResponse = {};
+export const MsgTokenizeEnergyResponse = {
+    encode(_, writer = Writer.create()) {
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseMsgTokenizeEnergyResponse,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(_) {
+        const message = {
+            ...baseMsgTokenizeEnergyResponse,
+        };
+        return message;
+    },
+    toJSON(_) {
+        const obj = {};
+        return obj;
+    },
+    fromPartial(_) {
+        const message = {
+            ...baseMsgTokenizeEnergyResponse,
+        };
+        return message;
+    },
+};
 export class MsgClientImpl {
     constructor(rpc) {
         this.rpc = rpc;
@@ -276,5 +384,10 @@ export class MsgClientImpl {
         const data = MsgRegisterEnergyStore.encode(request).finish();
         const promise = this.rpc.request("kiprasdak.energija.energija.Msg", "RegisterEnergyStore", data);
         return promise.then((data) => MsgRegisterEnergyStoreResponse.decode(new Reader(data)));
+    }
+    TokenizeEnergy(request) {
+        const data = MsgTokenizeEnergy.encode(request).finish();
+        const promise = this.rpc.request("kiprasdak.energija.energija.Msg", "TokenizeEnergy", data);
+        return promise.then((data) => MsgTokenizeEnergyResponse.decode(new Reader(data)));
     }
 }

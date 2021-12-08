@@ -31,6 +31,7 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(CmdRegisterSmartMeter())
 	cmd.AddCommand(CmdRegisterEnergyStore())
+	cmd.AddCommand(CmdTokenizeEnergy())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

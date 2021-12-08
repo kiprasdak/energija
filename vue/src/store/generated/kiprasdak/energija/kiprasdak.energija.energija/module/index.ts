@@ -4,13 +4,15 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgRegisterEnergyStore } from "./types/energija/tx";
 import { MsgRegisterSmartMeter } from "./types/energija/tx";
+import { MsgRegisterEnergyStore } from "./types/energija/tx";
+import { MsgTokenizeEnergy } from "./types/energija/tx";
 
 
 const types = [
-  ["/kiprasdak.energija.energija.MsgRegisterEnergyStore", MsgRegisterEnergyStore],
   ["/kiprasdak.energija.energija.MsgRegisterSmartMeter", MsgRegisterSmartMeter],
+  ["/kiprasdak.energija.energija.MsgRegisterEnergyStore", MsgRegisterEnergyStore],
+  ["/kiprasdak.energija.energija.MsgTokenizeEnergy", MsgTokenizeEnergy],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -39,8 +41,9 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgRegisterEnergyStore", value: data }),
     msgRegisterSmartMeter: (data: MsgRegisterSmartMeter): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgRegisterSmartMeter", value: data }),
+    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgRegisterEnergyStore", value: data }),
+    msgTokenizeEnergy: (data: MsgTokenizeEnergy): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgTokenizeEnergy", value: data }),
     
   };
 };

@@ -19,6 +19,13 @@ export interface MsgRegisterEnergyStore {
 
 export interface MsgRegisterEnergyStoreResponse {}
 
+export interface MsgTokenizeEnergy {
+  creator: string;
+  amount: number;
+}
+
+export interface MsgTokenizeEnergyResponse {}
+
 const baseMsgRegisterSmartMeter: object = {
   creator: "",
   production: 0,
@@ -319,15 +326,142 @@ export const MsgRegisterEnergyStoreResponse = {
   },
 };
 
+const baseMsgTokenizeEnergy: object = { creator: "", amount: 0 };
+
+export const MsgTokenizeEnergy = {
+  encode(message: MsgTokenizeEnergy, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.amount !== 0) {
+      writer.uint32(16).int32(message.amount);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgTokenizeEnergy {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgTokenizeEnergy } as MsgTokenizeEnergy;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.amount = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgTokenizeEnergy {
+    const message = { ...baseMsgTokenizeEnergy } as MsgTokenizeEnergy;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Number(object.amount);
+    } else {
+      message.amount = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgTokenizeEnergy): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgTokenizeEnergy>): MsgTokenizeEnergy {
+    const message = { ...baseMsgTokenizeEnergy } as MsgTokenizeEnergy;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    } else {
+      message.amount = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgTokenizeEnergyResponse: object = {};
+
+export const MsgTokenizeEnergyResponse = {
+  encode(
+    _: MsgTokenizeEnergyResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgTokenizeEnergyResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgTokenizeEnergyResponse,
+    } as MsgTokenizeEnergyResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgTokenizeEnergyResponse {
+    const message = {
+      ...baseMsgTokenizeEnergyResponse,
+    } as MsgTokenizeEnergyResponse;
+    return message;
+  },
+
+  toJSON(_: MsgTokenizeEnergyResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgTokenizeEnergyResponse>
+  ): MsgTokenizeEnergyResponse {
+    const message = {
+      ...baseMsgTokenizeEnergyResponse,
+    } as MsgTokenizeEnergyResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   RegisterSmartMeter(
     request: MsgRegisterSmartMeter
   ): Promise<MsgRegisterSmartMeterResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   RegisterEnergyStore(
     request: MsgRegisterEnergyStore
   ): Promise<MsgRegisterEnergyStoreResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  TokenizeEnergy(
+    request: MsgTokenizeEnergy
+  ): Promise<MsgTokenizeEnergyResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -360,6 +494,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgRegisterEnergyStoreResponse.decode(new Reader(data))
+    );
+  }
+
+  TokenizeEnergy(
+    request: MsgTokenizeEnergy
+  ): Promise<MsgTokenizeEnergyResponse> {
+    const data = MsgTokenizeEnergy.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "TokenizeEnergy",
+      data
+    );
+    return promise.then((data) =>
+      MsgTokenizeEnergyResponse.decode(new Reader(data))
     );
   }
 }

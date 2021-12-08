@@ -20180,6 +20180,8 @@ definitions:
     type: object
   kiprasdak.energija.energija.MsgRegisterSmartMeterResponse:
     type: object
+  kiprasdak.energija.energija.MsgTokenizeEnergyResponse:
+    type: object
   kiprasdak.energija.energija.QueryAllEnergyStoreResponse:
     type: object
     properties:
