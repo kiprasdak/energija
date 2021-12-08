@@ -17,6 +17,14 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.EnergyStoreList {
 		k.SetEnergyStore(ctx, elem)
 	}
+	// Set all the buyOrderBook
+	for _, elem := range genState.BuyOrderBookList {
+		k.SetBuyOrderBook(ctx, elem)
+	}
+	// Set all the sellOrderBook
+	for _, elem := range genState.SellOrderBookList {
+		k.SetSellOrderBook(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 }
 
@@ -26,6 +34,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 
 	genesis.SmartMeterList = k.GetAllSmartMeter(ctx)
 	genesis.EnergyStoreList = k.GetAllEnergyStore(ctx)
+	genesis.BuyOrderBookList = k.GetAllBuyOrderBook(ctx)
+	genesis.SellOrderBookList = k.GetAllSellOrderBook(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

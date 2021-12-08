@@ -1,6 +1,8 @@
 /* eslint-disable */
 import { SmartMeter } from "../energija/smart_meter";
 import { EnergyStore } from "../energija/energy_store";
+import { BuyOrderBook } from "../energija/buy_order_book";
+import { SellOrderBook } from "../energija/sell_order_book";
 import { Writer, Reader } from "protobufjs/minimal";
 export const protobufPackage = "kiprasdak.energija.energija";
 const baseGenesisState = {};
@@ -12,6 +14,12 @@ export const GenesisState = {
         for (const v of message.energyStoreList) {
             EnergyStore.encode(v, writer.uint32(18).fork()).ldelim();
         }
+        for (const v of message.buyOrderBookList) {
+            BuyOrderBook.encode(v, writer.uint32(26).fork()).ldelim();
+        }
+        for (const v of message.sellOrderBookList) {
+            SellOrderBook.encode(v, writer.uint32(34).fork()).ldelim();
+        }
         return writer;
     },
     decode(input, length) {
@@ -20,6 +28,8 @@ export const GenesisState = {
         const message = { ...baseGenesisState };
         message.smartMeterList = [];
         message.energyStoreList = [];
+        message.buyOrderBookList = [];
+        message.sellOrderBookList = [];
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -28,6 +38,12 @@ export const GenesisState = {
                     break;
                 case 2:
                     message.energyStoreList.push(EnergyStore.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    message.buyOrderBookList.push(BuyOrderBook.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    message.sellOrderBookList.push(SellOrderBook.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -40,6 +56,8 @@ export const GenesisState = {
         const message = { ...baseGenesisState };
         message.smartMeterList = [];
         message.energyStoreList = [];
+        message.buyOrderBookList = [];
+        message.sellOrderBookList = [];
         if (object.smartMeterList !== undefined && object.smartMeterList !== null) {
             for (const e of object.smartMeterList) {
                 message.smartMeterList.push(SmartMeter.fromJSON(e));
@@ -49,6 +67,18 @@ export const GenesisState = {
             object.energyStoreList !== null) {
             for (const e of object.energyStoreList) {
                 message.energyStoreList.push(EnergyStore.fromJSON(e));
+            }
+        }
+        if (object.buyOrderBookList !== undefined &&
+            object.buyOrderBookList !== null) {
+            for (const e of object.buyOrderBookList) {
+                message.buyOrderBookList.push(BuyOrderBook.fromJSON(e));
+            }
+        }
+        if (object.sellOrderBookList !== undefined &&
+            object.sellOrderBookList !== null) {
+            for (const e of object.sellOrderBookList) {
+                message.sellOrderBookList.push(SellOrderBook.fromJSON(e));
             }
         }
         return message;
@@ -67,12 +97,26 @@ export const GenesisState = {
         else {
             obj.energyStoreList = [];
         }
+        if (message.buyOrderBookList) {
+            obj.buyOrderBookList = message.buyOrderBookList.map((e) => e ? BuyOrderBook.toJSON(e) : undefined);
+        }
+        else {
+            obj.buyOrderBookList = [];
+        }
+        if (message.sellOrderBookList) {
+            obj.sellOrderBookList = message.sellOrderBookList.map((e) => e ? SellOrderBook.toJSON(e) : undefined);
+        }
+        else {
+            obj.sellOrderBookList = [];
+        }
         return obj;
     },
     fromPartial(object) {
         const message = { ...baseGenesisState };
         message.smartMeterList = [];
         message.energyStoreList = [];
+        message.buyOrderBookList = [];
+        message.sellOrderBookList = [];
         if (object.smartMeterList !== undefined && object.smartMeterList !== null) {
             for (const e of object.smartMeterList) {
                 message.smartMeterList.push(SmartMeter.fromPartial(e));
@@ -82,6 +126,18 @@ export const GenesisState = {
             object.energyStoreList !== null) {
             for (const e of object.energyStoreList) {
                 message.energyStoreList.push(EnergyStore.fromPartial(e));
+            }
+        }
+        if (object.buyOrderBookList !== undefined &&
+            object.buyOrderBookList !== null) {
+            for (const e of object.buyOrderBookList) {
+                message.buyOrderBookList.push(BuyOrderBook.fromPartial(e));
+            }
+        }
+        if (object.sellOrderBookList !== undefined &&
+            object.sellOrderBookList !== null) {
+            for (const e of object.sellOrderBookList) {
+                message.sellOrderBookList.push(SellOrderBook.fromPartial(e));
             }
         }
         return message;

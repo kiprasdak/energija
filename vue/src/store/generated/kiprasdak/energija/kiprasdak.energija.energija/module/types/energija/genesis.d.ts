@@ -1,12 +1,16 @@
 import { SmartMeter } from "../energija/smart_meter";
 import { EnergyStore } from "../energija/energy_store";
+import { BuyOrderBook } from "../energija/buy_order_book";
+import { SellOrderBook } from "../energija/sell_order_book";
 import { Writer, Reader } from "protobufjs/minimal";
 export declare const protobufPackage = "kiprasdak.energija.energija";
 /** GenesisState defines the energija module's genesis state. */
 export interface GenesisState {
     smartMeterList: SmartMeter[];
-    /** this line is used by starport scaffolding # genesis/proto/state */
     energyStoreList: EnergyStore[];
+    buyOrderBookList: BuyOrderBook[];
+    /** this line is used by starport scaffolding # genesis/proto/state */
+    sellOrderBookList: SellOrderBook[];
 }
 export declare const GenesisState: {
     encode(message: GenesisState, writer?: Writer): Writer;

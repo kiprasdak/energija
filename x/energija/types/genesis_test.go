@@ -37,6 +37,22 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				BuyOrderBookList: []types.BuyOrderBook{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				SellOrderBookList: []types.SellOrderBook{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -59,6 +75,34 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated energyStore",
 			genState: &types.GenesisState{
 				EnergyStoreList: []types.EnergyStore{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated buyOrderBook",
+			genState: &types.GenesisState{
+				BuyOrderBookList: []types.BuyOrderBook{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated sellOrderBook",
+			genState: &types.GenesisState{
+				SellOrderBookList: []types.SellOrderBook{
 					{
 						Index: "0",
 					},

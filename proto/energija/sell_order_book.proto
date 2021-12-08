@@ -1,0 +1,12 @@
+syntax = "proto3";
+package kiprasdak.energija.energija;
+
+import "energija/order.proto";
+option go_package = "github.com/kiprasdak/energija/x/energija/types";
+
+message SellOrderBook {
+  string index = 1;
+  string amountDenom = 2;
+  string priceDenom = 3;
+  OrderBook book = 4;
+}

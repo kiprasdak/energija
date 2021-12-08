@@ -130,12 +130,41 @@ export class HttpClient {
     }
 }
 /**
- * @title energija/energy_store.proto
+ * @title energija/buy_order_book.proto
  * @version version not set
  */
 export class Api extends HttpClient {
     constructor() {
         super(...arguments);
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryBuyOrderBookAll
+         * @summary Queries a list of buyOrderBook items.
+         * @request GET:/kiprasdak/energija/energija/buyOrderBook
+         */
+        this.queryBuyOrderBookAll = (query, params = {}) => this.request({
+            path: `/kiprasdak/energija/energija/buyOrderBook`,
+            method: "GET",
+            query: query,
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryBuyOrderBook
+         * @summary Queries a buyOrderBook by index.
+         * @request GET:/kiprasdak/energija/energija/buyOrderBook/{index}
+         */
+        this.queryBuyOrderBook = (index, params = {}) => this.request({
+            path: `/kiprasdak/energija/energija/buyOrderBook/${index}`,
+            method: "GET",
+            format: "json",
+            ...params,
+        });
         /**
          * No description
          *
@@ -161,6 +190,35 @@ export class Api extends HttpClient {
          */
         this.queryEnergyStore = (index, params = {}) => this.request({
             path: `/kiprasdak/energija/energija/energyStore/${index}`,
+            method: "GET",
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QuerySellOrderBookAll
+         * @summary Queries a list of sellOrderBook items.
+         * @request GET:/kiprasdak/energija/energija/sellOrderBook
+         */
+        this.querySellOrderBookAll = (query, params = {}) => this.request({
+            path: `/kiprasdak/energija/energija/sellOrderBook`,
+            method: "GET",
+            query: query,
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QuerySellOrderBook
+         * @summary Queries a sellOrderBook by index.
+         * @request GET:/kiprasdak/energija/energija/sellOrderBook/{index}
+         */
+        this.querySellOrderBook = (index, params = {}) => this.request({
+            path: `/kiprasdak/energija/energija/sellOrderBook/${index}`,
             method: "GET",
             format: "json",
             ...params,

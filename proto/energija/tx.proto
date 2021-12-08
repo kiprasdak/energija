@@ -10,6 +10,11 @@ service Msg {
       rpc RegisterSmartMeter(MsgRegisterSmartMeter) returns (MsgRegisterSmartMeterResponse);
   rpc RegisterEnergyStore(MsgRegisterEnergyStore) returns (MsgRegisterEnergyStoreResponse);
   rpc TokenizeEnergy(MsgTokenizeEnergy) returns (MsgTokenizeEnergyResponse);
+  rpc CreatePair(MsgCreatePair) returns (MsgCreatePairResponse);
+  rpc SellOrder(MsgSellOrder) returns (MsgSellOrderResponse);
+  rpc BuyOrder(MsgBuyOrder) returns (MsgBuyOrderResponse);
+  rpc CancelBuyOrder(MsgCancelBuyOrder) returns (MsgCancelBuyOrderResponse);
+  rpc CancelSellOrder(MsgCancelSellOrder) returns (MsgCancelSellOrderResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -37,6 +42,57 @@ message MsgTokenizeEnergy {
 }
 
 message MsgTokenizeEnergyResponse {
+}
+
+message MsgCreatePair {
+  string creator = 1;
+  string sourceDenom = 2;
+  string targetDenom = 3;
+}
+
+message MsgCreatePairResponse {
+}
+
+message MsgSellOrder {
+  string creator = 1;
+  string amountDenom = 2;
+  int32 amount = 3;
+  string priceDenom = 4;
+  int32 price = 5;
+}
+
+message MsgSellOrderResponse {
+}
+
+message MsgBuyOrder {
+  string creator = 1;
+  string amountDenom = 2;
+  int32 amount = 3;
+  string priceDenom = 4;
+  int32 price = 5;
+}
+
+message MsgBuyOrderResponse {
+}
+
+message MsgCancelBuyOrder {
+  string creator = 1;
+  string amountDenom = 2;
+  string priceDenom = 3;
+  int32 orderID = 4;
+}
+
+message MsgCancelBuyOrderResponse {
+}
+
+message MsgCancelSellOrder {
+  string creator = 1;
+  string amountDenom = 2;
+  string priceDenom = 3;
+  int32 orderID = 4;
+}
+
+message MsgCancelSellOrderResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

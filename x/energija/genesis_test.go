@@ -27,6 +27,22 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
+		BuyOrderBookList: []types.BuyOrderBook{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
+		SellOrderBookList: []types.SellOrderBook{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -39,5 +55,9 @@ func TestGenesis(t *testing.T) {
 	require.Subset(t, genesisState.SmartMeterList, got.SmartMeterList)
 	require.Len(t, got.EnergyStoreList, len(genesisState.EnergyStoreList))
 	require.Subset(t, genesisState.EnergyStoreList, got.EnergyStoreList)
+	require.Len(t, got.BuyOrderBookList, len(genesisState.BuyOrderBookList))
+	require.Subset(t, genesisState.BuyOrderBookList, got.BuyOrderBookList)
+	require.Len(t, got.SellOrderBookList, len(genesisState.SellOrderBookList))
+	require.Subset(t, genesisState.SellOrderBookList, got.SellOrderBookList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

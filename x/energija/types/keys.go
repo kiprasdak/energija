@@ -1,5 +1,7 @@
 package types
 
+import fmt "fmt"
+
 const (
 	// ModuleName defines the module name
 	ModuleName = "energija"
@@ -22,4 +24,8 @@ const (
 
 func KeyPrefix(p string) []byte {
 	return []byte(p)
+}
+
+func OrderBookIndex(sourceDenom string, targetDenom string) string {
+	return fmt.Sprintf("%s-%s", sourceDenom, targetDenom)
 }

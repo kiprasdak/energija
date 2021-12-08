@@ -3,6 +3,8 @@ package kiprasdak.energija.energija;
 
 import "energija/smart_meter.proto";
 import "energija/energy_store.proto";
+import "energija/buy_order_book.proto";
+import "energija/sell_order_book.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 import "gogoproto/gogo.proto";
 
@@ -12,5 +14,7 @@ option go_package = "github.com/kiprasdak/energija/x/energija/types";
 message GenesisState {
     repeated SmartMeter smartMeterList = 1 [(gogoproto.nullable) = false];
   repeated EnergyStore energyStoreList = 2 [(gogoproto.nullable) = false];
+  repeated BuyOrderBook buyOrderBookList = 3 [(gogoproto.nullable) = false];
+  repeated SellOrderBook sellOrderBookList = 4 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

@@ -26,6 +26,52 @@ export interface MsgTokenizeEnergy {
 
 export interface MsgTokenizeEnergyResponse {}
 
+export interface MsgCreatePair {
+  creator: string;
+  sourceDenom: string;
+  targetDenom: string;
+}
+
+export interface MsgCreatePairResponse {}
+
+export interface MsgSellOrder {
+  creator: string;
+  amountDenom: string;
+  amount: number;
+  priceDenom: string;
+  price: number;
+}
+
+export interface MsgSellOrderResponse {}
+
+export interface MsgBuyOrder {
+  creator: string;
+  amountDenom: string;
+  amount: number;
+  priceDenom: string;
+  price: number;
+}
+
+export interface MsgBuyOrderResponse {}
+
+export interface MsgCancelBuyOrder {
+  creator: string;
+  amountDenom: string;
+  priceDenom: string;
+  orderID: number;
+}
+
+export interface MsgCancelBuyOrderResponse {}
+
+export interface MsgCancelSellOrder {
+  creator: string;
+  amountDenom: string;
+  priceDenom: string;
+  orderID: number;
+}
+
+export interface MsgCancelSellOrderResponse {}
+
 const baseMsgRegisterSmartMeter: object = {
   creator: "",
   production: 0,
@@ -450,6 +496,806 @@ export const MsgTokenizeEnergyResponse = {
   },
 };
 
+const baseMsgCreatePair: object = {
+  creator: "",
+  sourceDenom: "",
+  targetDenom: "",
+};
+
+export const MsgCreatePair = {
+  encode(message: MsgCreatePair, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.sourceDenom !== "") {
+      writer.uint32(18).string(message.sourceDenom);
+    }
+    if (message.targetDenom !== "") {
+      writer.uint32(26).string(message.targetDenom);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCreatePair {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgCreatePair } as MsgCreatePair;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.sourceDenom = reader.string();
+          break;
+        case 3:
+          message.targetDenom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreatePair {
+    const message = { ...baseMsgCreatePair } as MsgCreatePair;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.sourceDenom !== undefined && object.sourceDenom !== null) {
+      message.sourceDenom = String(object.sourceDenom);
+    } else {
+      message.sourceDenom = "";
+    }
+    if (object.targetDenom !== undefined && object.targetDenom !== null) {
+      message.targetDenom = String(object.targetDenom);
+    } else {
+      message.targetDenom = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgCreatePair): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.sourceDenom !== undefined &&
+      (obj.sourceDenom = message.sourceDenom);
+    message.targetDenom !== undefined &&
+      (obj.targetDenom = message.targetDenom);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgCreatePair>): MsgCreatePair {
+    const message = { ...baseMsgCreatePair } as MsgCreatePair;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.sourceDenom !== undefined && object.sourceDenom !== null) {
+      message.sourceDenom = object.sourceDenom;
+    } else {
+      message.sourceDenom = "";
+    }
+    if (object.targetDenom !== undefined && object.targetDenom !== null) {
+      message.targetDenom = object.targetDenom;
+    } else {
+      message.targetDenom = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgCreatePairResponse: object = {};
+
+export const MsgCreatePairResponse = {
+  encode(_: MsgCreatePairResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCreatePairResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgCreatePairResponse } as MsgCreatePairResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgCreatePairResponse {
+    const message = { ...baseMsgCreatePairResponse } as MsgCreatePairResponse;
+    return message;
+  },
+
+  toJSON(_: MsgCreatePairResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<MsgCreatePairResponse>): MsgCreatePairResponse {
+    const message = { ...baseMsgCreatePairResponse } as MsgCreatePairResponse;
+    return message;
+  },
+};
+
+const baseMsgSellOrder: object = {
+  creator: "",
+  amountDenom: "",
+  amount: 0,
+  priceDenom: "",
+  price: 0,
+};
+
+export const MsgSellOrder = {
+  encode(message: MsgSellOrder, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.amountDenom !== "") {
+      writer.uint32(18).string(message.amountDenom);
+    }
+    if (message.amount !== 0) {
+      writer.uint32(24).int32(message.amount);
+    }
+    if (message.priceDenom !== "") {
+      writer.uint32(34).string(message.priceDenom);
+    }
+    if (message.price !== 0) {
+      writer.uint32(40).int32(message.price);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgSellOrder {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgSellOrder } as MsgSellOrder;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.amountDenom = reader.string();
+          break;
+        case 3:
+          message.amount = reader.int32();
+          break;
+        case 4:
+          message.priceDenom = reader.string();
+          break;
+        case 5:
+          message.price = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgSellOrder {
+    const message = { ...baseMsgSellOrder } as MsgSellOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = String(object.amountDenom);
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Number(object.amount);
+    } else {
+      message.amount = 0;
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = String(object.priceDenom);
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = Number(object.price);
+    } else {
+      message.price = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgSellOrder): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.amountDenom !== undefined &&
+      (obj.amountDenom = message.amountDenom);
+    message.amount !== undefined && (obj.amount = message.amount);
+    message.priceDenom !== undefined && (obj.priceDenom = message.priceDenom);
+    message.price !== undefined && (obj.price = message.price);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgSellOrder>): MsgSellOrder {
+    const message = { ...baseMsgSellOrder } as MsgSellOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = object.amountDenom;
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    } else {
+      message.amount = 0;
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = object.priceDenom;
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = object.price;
+    } else {
+      message.price = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgSellOrderResponse: object = {};
+
+export const MsgSellOrderResponse = {
+  encode(_: MsgSellOrderResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgSellOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgSellOrderResponse } as MsgSellOrderResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgSellOrderResponse {
+    const message = { ...baseMsgSellOrderResponse } as MsgSellOrderResponse;
+    return message;
+  },
+
+  toJSON(_: MsgSellOrderResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<MsgSellOrderResponse>): MsgSellOrderResponse {
+    const message = { ...baseMsgSellOrderResponse } as MsgSellOrderResponse;
+    return message;
+  },
+};
+
+const baseMsgBuyOrder: object = {
+  creator: "",
+  amountDenom: "",
+  amount: 0,
+  priceDenom: "",
+  price: 0,
+};
+
+export const MsgBuyOrder = {
+  encode(message: MsgBuyOrder, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.amountDenom !== "") {
+      writer.uint32(18).string(message.amountDenom);
+    }
+    if (message.amount !== 0) {
+      writer.uint32(24).int32(message.amount);
+    }
+    if (message.priceDenom !== "") {
+      writer.uint32(34).string(message.priceDenom);
+    }
+    if (message.price !== 0) {
+      writer.uint32(40).int32(message.price);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgBuyOrder {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgBuyOrder } as MsgBuyOrder;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.amountDenom = reader.string();
+          break;
+        case 3:
+          message.amount = reader.int32();
+          break;
+        case 4:
+          message.priceDenom = reader.string();
+          break;
+        case 5:
+          message.price = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgBuyOrder {
+    const message = { ...baseMsgBuyOrder } as MsgBuyOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = String(object.amountDenom);
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Number(object.amount);
+    } else {
+      message.amount = 0;
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = String(object.priceDenom);
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = Number(object.price);
+    } else {
+      message.price = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgBuyOrder): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.amountDenom !== undefined &&
+      (obj.amountDenom = message.amountDenom);
+    message.amount !== undefined && (obj.amount = message.amount);
+    message.priceDenom !== undefined && (obj.priceDenom = message.priceDenom);
+    message.price !== undefined && (obj.price = message.price);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgBuyOrder>): MsgBuyOrder {
+    const message = { ...baseMsgBuyOrder } as MsgBuyOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = object.amountDenom;
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    } else {
+      message.amount = 0;
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = object.priceDenom;
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = object.price;
+    } else {
+      message.price = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgBuyOrderResponse: object = {};
+
+export const MsgBuyOrderResponse = {
+  encode(_: MsgBuyOrderResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgBuyOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgBuyOrderResponse } as MsgBuyOrderResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgBuyOrderResponse {
+    const message = { ...baseMsgBuyOrderResponse } as MsgBuyOrderResponse;
+    return message;
+  },
+
+  toJSON(_: MsgBuyOrderResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<MsgBuyOrderResponse>): MsgBuyOrderResponse {
+    const message = { ...baseMsgBuyOrderResponse } as MsgBuyOrderResponse;
+    return message;
+  },
+};
+
+const baseMsgCancelBuyOrder: object = {
+  creator: "",
+  amountDenom: "",
+  priceDenom: "",
+  orderID: 0,
+};
+
+export const MsgCancelBuyOrder = {
+  encode(message: MsgCancelBuyOrder, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.amountDenom !== "") {
+      writer.uint32(18).string(message.amountDenom);
+    }
+    if (message.priceDenom !== "") {
+      writer.uint32(26).string(message.priceDenom);
+    }
+    if (message.orderID !== 0) {
+      writer.uint32(32).int32(message.orderID);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCancelBuyOrder {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgCancelBuyOrder } as MsgCancelBuyOrder;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.amountDenom = reader.string();
+          break;
+        case 3:
+          message.priceDenom = reader.string();
+          break;
+        case 4:
+          message.orderID = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCancelBuyOrder {
+    const message = { ...baseMsgCancelBuyOrder } as MsgCancelBuyOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = String(object.amountDenom);
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = String(object.priceDenom);
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.orderID !== undefined && object.orderID !== null) {
+      message.orderID = Number(object.orderID);
+    } else {
+      message.orderID = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgCancelBuyOrder): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.amountDenom !== undefined &&
+      (obj.amountDenom = message.amountDenom);
+    message.priceDenom !== undefined && (obj.priceDenom = message.priceDenom);
+    message.orderID !== undefined && (obj.orderID = message.orderID);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgCancelBuyOrder>): MsgCancelBuyOrder {
+    const message = { ...baseMsgCancelBuyOrder } as MsgCancelBuyOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = object.amountDenom;
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = object.priceDenom;
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.orderID !== undefined && object.orderID !== null) {
+      message.orderID = object.orderID;
+    } else {
+      message.orderID = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgCancelBuyOrderResponse: object = {};
+
+export const MsgCancelBuyOrderResponse = {
+  encode(
+    _: MsgCancelBuyOrderResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgCancelBuyOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgCancelBuyOrderResponse,
+    } as MsgCancelBuyOrderResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgCancelBuyOrderResponse {
+    const message = {
+      ...baseMsgCancelBuyOrderResponse,
+    } as MsgCancelBuyOrderResponse;
+    return message;
+  },
+
+  toJSON(_: MsgCancelBuyOrderResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgCancelBuyOrderResponse>
+  ): MsgCancelBuyOrderResponse {
+    const message = {
+      ...baseMsgCancelBuyOrderResponse,
+    } as MsgCancelBuyOrderResponse;
+    return message;
+  },
+};
+
+const baseMsgCancelSellOrder: object = {
+  creator: "",
+  amountDenom: "",
+  priceDenom: "",
+  orderID: 0,
+};
+
+export const MsgCancelSellOrder = {
+  encode(
+    message: MsgCancelSellOrder,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.amountDenom !== "") {
+      writer.uint32(18).string(message.amountDenom);
+    }
+    if (message.priceDenom !== "") {
+      writer.uint32(26).string(message.priceDenom);
+    }
+    if (message.orderID !== 0) {
+      writer.uint32(32).int32(message.orderID);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCancelSellOrder {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgCancelSellOrder } as MsgCancelSellOrder;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.amountDenom = reader.string();
+          break;
+        case 3:
+          message.priceDenom = reader.string();
+          break;
+        case 4:
+          message.orderID = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCancelSellOrder {
+    const message = { ...baseMsgCancelSellOrder } as MsgCancelSellOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = String(object.amountDenom);
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = String(object.priceDenom);
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.orderID !== undefined && object.orderID !== null) {
+      message.orderID = Number(object.orderID);
+    } else {
+      message.orderID = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgCancelSellOrder): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.amountDenom !== undefined &&
+      (obj.amountDenom = message.amountDenom);
+    message.priceDenom !== undefined && (obj.priceDenom = message.priceDenom);
+    message.orderID !== undefined && (obj.orderID = message.orderID);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgCancelSellOrder>): MsgCancelSellOrder {
+    const message = { ...baseMsgCancelSellOrder } as MsgCancelSellOrder;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.amountDenom !== undefined && object.amountDenom !== null) {
+      message.amountDenom = object.amountDenom;
+    } else {
+      message.amountDenom = "";
+    }
+    if (object.priceDenom !== undefined && object.priceDenom !== null) {
+      message.priceDenom = object.priceDenom;
+    } else {
+      message.priceDenom = "";
+    }
+    if (object.orderID !== undefined && object.orderID !== null) {
+      message.orderID = object.orderID;
+    } else {
+      message.orderID = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgCancelSellOrderResponse: object = {};
+
+export const MsgCancelSellOrderResponse = {
+  encode(
+    _: MsgCancelSellOrderResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgCancelSellOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgCancelSellOrderResponse,
+    } as MsgCancelSellOrderResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgCancelSellOrderResponse {
+    const message = {
+      ...baseMsgCancelSellOrderResponse,
+    } as MsgCancelSellOrderResponse;
+    return message;
+  },
+
+  toJSON(_: MsgCancelSellOrderResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgCancelSellOrderResponse>
+  ): MsgCancelSellOrderResponse {
+    const message = {
+      ...baseMsgCancelSellOrderResponse,
+    } as MsgCancelSellOrderResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   RegisterSmartMeter(
@@ -458,10 +1304,19 @@ export interface Msg {
   RegisterEnergyStore(
     request: MsgRegisterEnergyStore
   ): Promise<MsgRegisterEnergyStoreResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   TokenizeEnergy(
     request: MsgTokenizeEnergy
   ): Promise<MsgTokenizeEnergyResponse>;
+  CreatePair(request: MsgCreatePair): Promise<MsgCreatePairResponse>;
+  SellOrder(request: MsgSellOrder): Promise<MsgSellOrderResponse>;
+  BuyOrder(request: MsgBuyOrder): Promise<MsgBuyOrderResponse>;
+  CancelBuyOrder(
+    request: MsgCancelBuyOrder
+  ): Promise<MsgCancelBuyOrderResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  CancelSellOrder(
+    request: MsgCancelSellOrder
+  ): Promise<MsgCancelSellOrderResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -508,6 +1363,68 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgTokenizeEnergyResponse.decode(new Reader(data))
+    );
+  }
+
+  CreatePair(request: MsgCreatePair): Promise<MsgCreatePairResponse> {
+    const data = MsgCreatePair.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "CreatePair",
+      data
+    );
+    return promise.then((data) =>
+      MsgCreatePairResponse.decode(new Reader(data))
+    );
+  }
+
+  SellOrder(request: MsgSellOrder): Promise<MsgSellOrderResponse> {
+    const data = MsgSellOrder.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "SellOrder",
+      data
+    );
+    return promise.then((data) =>
+      MsgSellOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  BuyOrder(request: MsgBuyOrder): Promise<MsgBuyOrderResponse> {
+    const data = MsgBuyOrder.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "BuyOrder",
+      data
+    );
+    return promise.then((data) => MsgBuyOrderResponse.decode(new Reader(data)));
+  }
+
+  CancelBuyOrder(
+    request: MsgCancelBuyOrder
+  ): Promise<MsgCancelBuyOrderResponse> {
+    const data = MsgCancelBuyOrder.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "CancelBuyOrder",
+      data
+    );
+    return promise.then((data) =>
+      MsgCancelBuyOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  CancelSellOrder(
+    request: MsgCancelSellOrder
+  ): Promise<MsgCancelSellOrderResponse> {
+    const data = MsgCancelSellOrder.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "CancelSellOrder",
+      data
+    );
+    return promise.then((data) =>
+      MsgCancelSellOrderResponse.decode(new Reader(data))
     );
   }
 }

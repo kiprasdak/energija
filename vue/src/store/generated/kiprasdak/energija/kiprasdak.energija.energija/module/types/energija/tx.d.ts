@@ -20,6 +20,47 @@ export interface MsgTokenizeEnergy {
 }
 export interface MsgTokenizeEnergyResponse {
 }
+export interface MsgCreatePair {
+    creator: string;
+    sourceDenom: string;
+    targetDenom: string;
+}
+export interface MsgCreatePairResponse {
+}
+export interface MsgSellOrder {
+    creator: string;
+    amountDenom: string;
+    amount: number;
+    priceDenom: string;
+    price: number;
+}
+export interface MsgSellOrderResponse {
+}
+export interface MsgBuyOrder {
+    creator: string;
+    amountDenom: string;
+    amount: number;
+    priceDenom: string;
+    price: number;
+}
+export interface MsgBuyOrderResponse {
+}
+export interface MsgCancelBuyOrder {
+    creator: string;
+    amountDenom: string;
+    priceDenom: string;
+    orderID: number;
+}
+export interface MsgCancelBuyOrderResponse {
+}
+export interface MsgCancelSellOrder {
+    creator: string;
+    amountDenom: string;
+    priceDenom: string;
+    orderID: number;
+}
+export interface MsgCancelSellOrderResponse {
+}
 export declare const MsgRegisterSmartMeter: {
     encode(message: MsgRegisterSmartMeter, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgRegisterSmartMeter;
@@ -62,12 +103,87 @@ export declare const MsgTokenizeEnergyResponse: {
     toJSON(_: MsgTokenizeEnergyResponse): unknown;
     fromPartial(_: DeepPartial<MsgTokenizeEnergyResponse>): MsgTokenizeEnergyResponse;
 };
+export declare const MsgCreatePair: {
+    encode(message: MsgCreatePair, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCreatePair;
+    fromJSON(object: any): MsgCreatePair;
+    toJSON(message: MsgCreatePair): unknown;
+    fromPartial(object: DeepPartial<MsgCreatePair>): MsgCreatePair;
+};
+export declare const MsgCreatePairResponse: {
+    encode(_: MsgCreatePairResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCreatePairResponse;
+    fromJSON(_: any): MsgCreatePairResponse;
+    toJSON(_: MsgCreatePairResponse): unknown;
+    fromPartial(_: DeepPartial<MsgCreatePairResponse>): MsgCreatePairResponse;
+};
+export declare const MsgSellOrder: {
+    encode(message: MsgSellOrder, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgSellOrder;
+    fromJSON(object: any): MsgSellOrder;
+    toJSON(message: MsgSellOrder): unknown;
+    fromPartial(object: DeepPartial<MsgSellOrder>): MsgSellOrder;
+};
+export declare const MsgSellOrderResponse: {
+    encode(_: MsgSellOrderResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgSellOrderResponse;
+    fromJSON(_: any): MsgSellOrderResponse;
+    toJSON(_: MsgSellOrderResponse): unknown;
+    fromPartial(_: DeepPartial<MsgSellOrderResponse>): MsgSellOrderResponse;
+};
+export declare const MsgBuyOrder: {
+    encode(message: MsgBuyOrder, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgBuyOrder;
+    fromJSON(object: any): MsgBuyOrder;
+    toJSON(message: MsgBuyOrder): unknown;
+    fromPartial(object: DeepPartial<MsgBuyOrder>): MsgBuyOrder;
+};
+export declare const MsgBuyOrderResponse: {
+    encode(_: MsgBuyOrderResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgBuyOrderResponse;
+    fromJSON(_: any): MsgBuyOrderResponse;
+    toJSON(_: MsgBuyOrderResponse): unknown;
+    fromPartial(_: DeepPartial<MsgBuyOrderResponse>): MsgBuyOrderResponse;
+};
+export declare const MsgCancelBuyOrder: {
+    encode(message: MsgCancelBuyOrder, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCancelBuyOrder;
+    fromJSON(object: any): MsgCancelBuyOrder;
+    toJSON(message: MsgCancelBuyOrder): unknown;
+    fromPartial(object: DeepPartial<MsgCancelBuyOrder>): MsgCancelBuyOrder;
+};
+export declare const MsgCancelBuyOrderResponse: {
+    encode(_: MsgCancelBuyOrderResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCancelBuyOrderResponse;
+    fromJSON(_: any): MsgCancelBuyOrderResponse;
+    toJSON(_: MsgCancelBuyOrderResponse): unknown;
+    fromPartial(_: DeepPartial<MsgCancelBuyOrderResponse>): MsgCancelBuyOrderResponse;
+};
+export declare const MsgCancelSellOrder: {
+    encode(message: MsgCancelSellOrder, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCancelSellOrder;
+    fromJSON(object: any): MsgCancelSellOrder;
+    toJSON(message: MsgCancelSellOrder): unknown;
+    fromPartial(object: DeepPartial<MsgCancelSellOrder>): MsgCancelSellOrder;
+};
+export declare const MsgCancelSellOrderResponse: {
+    encode(_: MsgCancelSellOrderResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgCancelSellOrderResponse;
+    fromJSON(_: any): MsgCancelSellOrderResponse;
+    toJSON(_: MsgCancelSellOrderResponse): unknown;
+    fromPartial(_: DeepPartial<MsgCancelSellOrderResponse>): MsgCancelSellOrderResponse;
+};
 /** Msg defines the Msg service. */
 export interface Msg {
     RegisterSmartMeter(request: MsgRegisterSmartMeter): Promise<MsgRegisterSmartMeterResponse>;
     RegisterEnergyStore(request: MsgRegisterEnergyStore): Promise<MsgRegisterEnergyStoreResponse>;
-    /** this line is used by starport scaffolding # proto/tx/rpc */
     TokenizeEnergy(request: MsgTokenizeEnergy): Promise<MsgTokenizeEnergyResponse>;
+    CreatePair(request: MsgCreatePair): Promise<MsgCreatePairResponse>;
+    SellOrder(request: MsgSellOrder): Promise<MsgSellOrderResponse>;
+    BuyOrder(request: MsgBuyOrder): Promise<MsgBuyOrderResponse>;
+    CancelBuyOrder(request: MsgCancelBuyOrder): Promise<MsgCancelBuyOrderResponse>;
+    /** this line is used by starport scaffolding # proto/tx/rpc */
+    CancelSellOrder(request: MsgCancelSellOrder): Promise<MsgCancelSellOrderResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
@@ -75,6 +191,11 @@ export declare class MsgClientImpl implements Msg {
     RegisterSmartMeter(request: MsgRegisterSmartMeter): Promise<MsgRegisterSmartMeterResponse>;
     RegisterEnergyStore(request: MsgRegisterEnergyStore): Promise<MsgRegisterEnergyStoreResponse>;
     TokenizeEnergy(request: MsgTokenizeEnergy): Promise<MsgTokenizeEnergyResponse>;
+    CreatePair(request: MsgCreatePair): Promise<MsgCreatePairResponse>;
+    SellOrder(request: MsgSellOrder): Promise<MsgSellOrderResponse>;
+    BuyOrder(request: MsgBuyOrder): Promise<MsgBuyOrderResponse>;
+    CancelBuyOrder(request: MsgCancelBuyOrder): Promise<MsgCancelBuyOrderResponse>;
+    CancelSellOrder(request: MsgCancelSellOrder): Promise<MsgCancelSellOrderResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

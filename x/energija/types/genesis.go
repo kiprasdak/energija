@@ -10,8 +10,10 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		SmartMeterList:  []SmartMeter{},
-		EnergyStoreList: []EnergyStore{},
+		SmartMeterList:    []SmartMeter{},
+		EnergyStoreList:   []EnergyStore{},
+		BuyOrderBookList:  []BuyOrderBook{},
+		SellOrderBookList: []SellOrderBook{},
 		// this line is used by starport scaffolding # genesis/types/default
 	}
 }
@@ -38,6 +40,26 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for energyStore")
 		}
 		energyStoreIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in buyOrderBook
+	buyOrderBookIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.BuyOrderBookList {
+		index := string(BuyOrderBookKey(elem.Index))
+		if _, ok := buyOrderBookIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for buyOrderBook")
+		}
+		buyOrderBookIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in sellOrderBook
+	sellOrderBookIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.SellOrderBookList {
+		index := string(SellOrderBookKey(elem.Index))
+		if _, ok := sellOrderBookIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for sellOrderBook")
+		}
+		sellOrderBookIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

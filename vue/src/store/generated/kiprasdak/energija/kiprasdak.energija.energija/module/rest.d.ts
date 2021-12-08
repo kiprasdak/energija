@@ -1,3 +1,9 @@
+export interface EnergijaBuyOrderBook {
+    index?: string;
+    amountDenom?: string;
+    priceDenom?: string;
+    book?: EnergijaOrderBook;
+}
 export interface EnergijaEnergyStore {
     index?: string;
     /** @format int32 */
@@ -6,11 +12,56 @@ export interface EnergijaEnergyStore {
     reserved?: number;
     description?: string;
 }
+export declare type EnergijaMsgBuyOrderResponse = object;
+export declare type EnergijaMsgCancelBuyOrderResponse = object;
+export declare type EnergijaMsgCancelSellOrderResponse = object;
+export declare type EnergijaMsgCreatePairResponse = object;
 export declare type EnergijaMsgRegisterEnergyStoreResponse = object;
 export declare type EnergijaMsgRegisterSmartMeterResponse = object;
+export declare type EnergijaMsgSellOrderResponse = object;
 export declare type EnergijaMsgTokenizeEnergyResponse = object;
+export interface EnergijaOrder {
+    /** @format int32 */
+    id?: number;
+    creator?: string;
+    /** @format int32 */
+    amount?: number;
+    /** @format int32 */
+    price?: number;
+}
+export interface EnergijaOrderBook {
+    /** @format int32 */
+    idCount?: number;
+    orders?: EnergijaOrder[];
+}
+export interface EnergijaQueryAllBuyOrderBookResponse {
+    buyOrderBook?: EnergijaBuyOrderBook[];
+    /**
+     * PageResponse is to be embedded in gRPC response messages where the
+     * corresponding request message has used PageRequest.
+     *
+     *  message SomeResponse {
+     *          repeated Bar results = 1;
+     *          PageResponse page = 2;
+     *  }
+     */
+    pagination?: V1Beta1PageResponse;
+}
 export interface EnergijaQueryAllEnergyStoreResponse {
     energyStore?: EnergijaEnergyStore[];
+    /**
+     * PageResponse is to be embedded in gRPC response messages where the
+     * corresponding request message has used PageRequest.
+     *
+     *  message SomeResponse {
+     *          repeated Bar results = 1;
+     *          PageResponse page = 2;
+     *  }
+     */
+    pagination?: V1Beta1PageResponse;
+}
+export interface EnergijaQueryAllSellOrderBookResponse {
+    sellOrderBook?: EnergijaSellOrderBook[];
     /**
      * PageResponse is to be embedded in gRPC response messages where the
      * corresponding request message has used PageRequest.
@@ -35,11 +86,23 @@ export interface EnergijaQueryAllSmartMeterResponse {
      */
     pagination?: V1Beta1PageResponse;
 }
+export interface EnergijaQueryGetBuyOrderBookResponse {
+    buyOrderBook?: EnergijaBuyOrderBook;
+}
 export interface EnergijaQueryGetEnergyStoreResponse {
     energyStore?: EnergijaEnergyStore;
 }
+export interface EnergijaQueryGetSellOrderBookResponse {
+    sellOrderBook?: EnergijaSellOrderBook;
+}
 export interface EnergijaQueryGetSmartMeterResponse {
     smartMeter?: EnergijaSmartMeter;
+}
+export interface EnergijaSellOrderBook {
+    index?: string;
+    amountDenom?: string;
+    priceDenom?: string;
+    book?: EnergijaOrderBook;
 }
 export interface EnergijaSmartMeter {
     index?: string;
@@ -164,10 +227,34 @@ export declare class HttpClient<SecurityDataType = unknown> {
     request: <T = any, E = any>({ body, secure, path, type, query, format, baseUrl, cancelToken, ...params }: FullRequestParams) => Promise<HttpResponse<T, E>>;
 }
 /**
- * @title energija/energy_store.proto
+ * @title energija/buy_order_book.proto
  * @version version not set
  */
 export declare class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryBuyOrderBookAll
+     * @summary Queries a list of buyOrderBook items.
+     * @request GET:/kiprasdak/energija/energija/buyOrderBook
+     */
+    queryBuyOrderBookAll: (query?: {
+        "pagination.key"?: string;
+        "pagination.offset"?: string;
+        "pagination.limit"?: string;
+        "pagination.countTotal"?: boolean;
+        "pagination.reverse"?: boolean;
+    }, params?: RequestParams) => Promise<HttpResponse<EnergijaQueryAllBuyOrderBookResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryBuyOrderBook
+     * @summary Queries a buyOrderBook by index.
+     * @request GET:/kiprasdak/energija/energija/buyOrderBook/{index}
+     */
+    queryBuyOrderBook: (index: string, params?: RequestParams) => Promise<HttpResponse<EnergijaQueryGetBuyOrderBookResponse, RpcStatus>>;
     /**
      * No description
      *
@@ -192,6 +279,30 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request GET:/kiprasdak/energija/energija/energyStore/{index}
      */
     queryEnergyStore: (index: string, params?: RequestParams) => Promise<HttpResponse<EnergijaQueryGetEnergyStoreResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QuerySellOrderBookAll
+     * @summary Queries a list of sellOrderBook items.
+     * @request GET:/kiprasdak/energija/energija/sellOrderBook
+     */
+    querySellOrderBookAll: (query?: {
+        "pagination.key"?: string;
+        "pagination.offset"?: string;
+        "pagination.limit"?: string;
+        "pagination.countTotal"?: boolean;
+        "pagination.reverse"?: boolean;
+    }, params?: RequestParams) => Promise<HttpResponse<EnergijaQueryAllSellOrderBookResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QuerySellOrderBook
+     * @summary Queries a sellOrderBook by index.
+     * @request GET:/kiprasdak/energija/energija/sellOrderBook/{index}
+     */
+    querySellOrderBook: (index: string, params?: RequestParams) => Promise<HttpResponse<EnergijaQueryGetSellOrderBookResponse, RpcStatus>>;
     /**
      * No description
      *
