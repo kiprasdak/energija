@@ -61,6 +61,12 @@ export interface MsgCancelSellOrder {
 }
 export interface MsgCancelSellOrderResponse {
 }
+export interface MsgEnergizeToken {
+    creator: string;
+    amount: number;
+}
+export interface MsgEnergizeTokenResponse {
+}
 export declare const MsgRegisterSmartMeter: {
     encode(message: MsgRegisterSmartMeter, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgRegisterSmartMeter;
@@ -173,6 +179,20 @@ export declare const MsgCancelSellOrderResponse: {
     toJSON(_: MsgCancelSellOrderResponse): unknown;
     fromPartial(_: DeepPartial<MsgCancelSellOrderResponse>): MsgCancelSellOrderResponse;
 };
+export declare const MsgEnergizeToken: {
+    encode(message: MsgEnergizeToken, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgEnergizeToken;
+    fromJSON(object: any): MsgEnergizeToken;
+    toJSON(message: MsgEnergizeToken): unknown;
+    fromPartial(object: DeepPartial<MsgEnergizeToken>): MsgEnergizeToken;
+};
+export declare const MsgEnergizeTokenResponse: {
+    encode(_: MsgEnergizeTokenResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgEnergizeTokenResponse;
+    fromJSON(_: any): MsgEnergizeTokenResponse;
+    toJSON(_: MsgEnergizeTokenResponse): unknown;
+    fromPartial(_: DeepPartial<MsgEnergizeTokenResponse>): MsgEnergizeTokenResponse;
+};
 /** Msg defines the Msg service. */
 export interface Msg {
     RegisterSmartMeter(request: MsgRegisterSmartMeter): Promise<MsgRegisterSmartMeterResponse>;
@@ -182,8 +202,9 @@ export interface Msg {
     SellOrder(request: MsgSellOrder): Promise<MsgSellOrderResponse>;
     BuyOrder(request: MsgBuyOrder): Promise<MsgBuyOrderResponse>;
     CancelBuyOrder(request: MsgCancelBuyOrder): Promise<MsgCancelBuyOrderResponse>;
-    /** this line is used by starport scaffolding # proto/tx/rpc */
     CancelSellOrder(request: MsgCancelSellOrder): Promise<MsgCancelSellOrderResponse>;
+    /** this line is used by starport scaffolding # proto/tx/rpc */
+    EnergizeToken(request: MsgEnergizeToken): Promise<MsgEnergizeTokenResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
@@ -196,6 +217,7 @@ export declare class MsgClientImpl implements Msg {
     BuyOrder(request: MsgBuyOrder): Promise<MsgBuyOrderResponse>;
     CancelBuyOrder(request: MsgCancelBuyOrder): Promise<MsgCancelBuyOrderResponse>;
     CancelSellOrder(request: MsgCancelSellOrder): Promise<MsgCancelSellOrderResponse>;
+    EnergizeToken(request: MsgEnergizeToken): Promise<MsgEnergizeTokenResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

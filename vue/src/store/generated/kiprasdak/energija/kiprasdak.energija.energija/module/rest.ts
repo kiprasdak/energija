@@ -35,6 +35,8 @@ export type EnergijaMsgCancelSellOrderResponse = object;
 
 export type EnergijaMsgCreatePairResponse = object;
 
+export type EnergijaMsgEnergizeTokenResponse = object;
+
 export type EnergijaMsgRegisterEnergyStoreResponse = object;
 
 export type EnergijaMsgRegisterSmartMeterResponse = object;

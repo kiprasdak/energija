@@ -108,6 +108,7 @@ func (k Keeper) ProcessSellOrder(ctx sdk.Context, pairIndex string, creator stri
 		if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, creatorAddr, coins); err != nil {
 			return err
 		}
+		k.TransferEnergy(ctx, liquidation.Amount, liquidation.Creator, creator)
 	}
 
 	_ = remainingSellOrder
@@ -172,6 +173,7 @@ func (k Keeper) ProcessBuyOrder(ctx sdk.Context, pairIndex string, creator strin
 		if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, creatorAddr, coins); err != nil {
 			return err
 		}
+		k.TransferEnergy(ctx, liquidation.Amount, creator, liquidation.Creator)
 	}
 	_ = remainingBuyOrder
 	_ = liquidation

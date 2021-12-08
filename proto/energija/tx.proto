@@ -15,6 +15,7 @@ service Msg {
   rpc BuyOrder(MsgBuyOrder) returns (MsgBuyOrderResponse);
   rpc CancelBuyOrder(MsgCancelBuyOrder) returns (MsgCancelBuyOrderResponse);
   rpc CancelSellOrder(MsgCancelSellOrder) returns (MsgCancelSellOrderResponse);
+  rpc EnergizeToken(MsgEnergizeToken) returns (MsgEnergizeTokenResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -93,6 +94,14 @@ message MsgCancelSellOrder {
 }
 
 message MsgCancelSellOrderResponse {
+}
+
+message MsgEnergizeToken {
+  string creator = 1;
+  int32 amount = 2;
+}
+
+message MsgEnergizeTokenResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

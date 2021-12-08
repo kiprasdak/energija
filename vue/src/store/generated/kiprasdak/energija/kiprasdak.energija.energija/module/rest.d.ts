@@ -16,6 +16,7 @@ export declare type EnergijaMsgBuyOrderResponse = object;
 export declare type EnergijaMsgCancelBuyOrderResponse = object;
 export declare type EnergijaMsgCancelSellOrderResponse = object;
 export declare type EnergijaMsgCreatePairResponse = object;
+export declare type EnergijaMsgEnergizeTokenResponse = object;
 export declare type EnergijaMsgRegisterEnergyStoreResponse = object;
 export declare type EnergijaMsgRegisterSmartMeterResponse = object;
 export declare type EnergijaMsgSellOrderResponse = object;

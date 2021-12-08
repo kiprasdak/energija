@@ -20635,6 +20635,8 @@ definitions:
     type: object
   kiprasdak.energija.energija.MsgCreatePairResponse:
     type: object
+  kiprasdak.energija.energija.MsgEnergizeTokenResponse:
+    type: object
   kiprasdak.energija.energija.MsgRegisterEnergyStoreResponse:
     type: object
   kiprasdak.energija.energija.MsgRegisterSmartMeterResponse:

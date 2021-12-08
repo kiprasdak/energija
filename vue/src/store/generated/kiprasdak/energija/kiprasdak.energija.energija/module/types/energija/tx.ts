@@ -72,6 +72,13 @@ export interface MsgCancelSellOrder {
 
 export interface MsgCancelSellOrderResponse {}
 
+export interface MsgEnergizeToken {
+  creator: string;
+  amount: number;
+}
+
+export interface MsgEnergizeTokenResponse {}
+
 const baseMsgRegisterSmartMeter: object = {
   creator: "",
   production: 0,
@@ -1296,6 +1303,130 @@ export const MsgCancelSellOrderResponse = {
   },
 };
 
+const baseMsgEnergizeToken: object = { creator: "", amount: 0 };
+
+export const MsgEnergizeToken = {
+  encode(message: MsgEnergizeToken, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.amount !== 0) {
+      writer.uint32(16).int32(message.amount);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgEnergizeToken {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgEnergizeToken } as MsgEnergizeToken;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.amount = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgEnergizeToken {
+    const message = { ...baseMsgEnergizeToken } as MsgEnergizeToken;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Number(object.amount);
+    } else {
+      message.amount = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgEnergizeToken): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgEnergizeToken>): MsgEnergizeToken {
+    const message = { ...baseMsgEnergizeToken } as MsgEnergizeToken;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    } else {
+      message.amount = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgEnergizeTokenResponse: object = {};
+
+export const MsgEnergizeTokenResponse = {
+  encode(
+    _: MsgEnergizeTokenResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgEnergizeTokenResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgEnergizeTokenResponse,
+    } as MsgEnergizeTokenResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgEnergizeTokenResponse {
+    const message = {
+      ...baseMsgEnergizeTokenResponse,
+    } as MsgEnergizeTokenResponse;
+    return message;
+  },
+
+  toJSON(_: MsgEnergizeTokenResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgEnergizeTokenResponse>
+  ): MsgEnergizeTokenResponse {
+    const message = {
+      ...baseMsgEnergizeTokenResponse,
+    } as MsgEnergizeTokenResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   RegisterSmartMeter(
@@ -1313,10 +1444,11 @@ export interface Msg {
   CancelBuyOrder(
     request: MsgCancelBuyOrder
   ): Promise<MsgCancelBuyOrderResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   CancelSellOrder(
     request: MsgCancelSellOrder
   ): Promise<MsgCancelSellOrderResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  EnergizeToken(request: MsgEnergizeToken): Promise<MsgEnergizeTokenResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1425,6 +1557,18 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgCancelSellOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  EnergizeToken(request: MsgEnergizeToken): Promise<MsgEnergizeTokenResponse> {
+    const data = MsgEnergizeToken.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "EnergizeToken",
+      data
+    );
+    return promise.then((data) =>
+      MsgEnergizeTokenResponse.decode(new Reader(data))
     );
   }
 }
