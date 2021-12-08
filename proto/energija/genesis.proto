@@ -1,0 +1,11 @@
+syntax = "proto3";
+package kiprasdak.energija.energija;
+
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/kiprasdak/energija/x/energija/types";
+
+// GenesisState defines the energija module's genesis state.
+message GenesisState {
+    // this line is used by starport scaffolding # genesis/proto/state
+}
