@@ -154,6 +154,115 @@ export const MsgRegisterSmartMeterResponse = {
         return message;
     },
 };
+const baseMsgRegisterEnergyStore = { creator: "", description: "" };
+export const MsgRegisterEnergyStore = {
+    encode(message, writer = Writer.create()) {
+        if (message.creator !== "") {
+            writer.uint32(10).string(message.creator);
+        }
+        if (message.description !== "") {
+            writer.uint32(18).string(message.description);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseMsgRegisterEnergyStore };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.creator = reader.string();
+                    break;
+                case 2:
+                    message.description = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = { ...baseMsgRegisterEnergyStore };
+        if (object.creator !== undefined && object.creator !== null) {
+            message.creator = String(object.creator);
+        }
+        else {
+            message.creator = "";
+        }
+        if (object.description !== undefined && object.description !== null) {
+            message.description = String(object.description);
+        }
+        else {
+            message.description = "";
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.creator !== undefined && (obj.creator = message.creator);
+        message.description !== undefined &&
+            (obj.description = message.description);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = { ...baseMsgRegisterEnergyStore };
+        if (object.creator !== undefined && object.creator !== null) {
+            message.creator = object.creator;
+        }
+        else {
+            message.creator = "";
+        }
+        if (object.description !== undefined && object.description !== null) {
+            message.description = object.description;
+        }
+        else {
+            message.description = "";
+        }
+        return message;
+    },
+};
+const baseMsgRegisterEnergyStoreResponse = {};
+export const MsgRegisterEnergyStoreResponse = {
+    encode(_, writer = Writer.create()) {
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseMsgRegisterEnergyStoreResponse,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(_) {
+        const message = {
+            ...baseMsgRegisterEnergyStoreResponse,
+        };
+        return message;
+    },
+    toJSON(_) {
+        const obj = {};
+        return obj;
+    },
+    fromPartial(_) {
+        const message = {
+            ...baseMsgRegisterEnergyStoreResponse,
+        };
+        return message;
+    },
+};
 export class MsgClientImpl {
     constructor(rpc) {
         this.rpc = rpc;
@@ -162,5 +271,10 @@ export class MsgClientImpl {
         const data = MsgRegisterSmartMeter.encode(request).finish();
         const promise = this.rpc.request("kiprasdak.energija.energija.Msg", "RegisterSmartMeter", data);
         return promise.then((data) => MsgRegisterSmartMeterResponse.decode(new Reader(data)));
+    }
+    RegisterEnergyStore(request) {
+        const data = MsgRegisterEnergyStore.encode(request).finish();
+        const promise = this.rpc.request("kiprasdak.energija.energija.Msg", "RegisterEnergyStore", data);
+        return promise.then((data) => MsgRegisterEnergyStoreResponse.decode(new Reader(data)));
     }
 }

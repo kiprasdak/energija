@@ -20,6 +20,8 @@ export interface EnergijaEnergyStore {
   description?: string;
 }
 
+export type EnergijaMsgRegisterEnergyStoreResponse = object;
+
 export type EnergijaMsgRegisterSmartMeterResponse = object;
 
 export interface EnergijaQueryAllEnergyStoreResponse {

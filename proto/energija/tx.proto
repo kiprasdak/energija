@@ -8,6 +8,7 @@ option go_package = "github.com/kiprasdak/energija/x/energija/types";
 // Msg defines the Msg service.
 service Msg {
       rpc RegisterSmartMeter(MsgRegisterSmartMeter) returns (MsgRegisterSmartMeterResponse);
+  rpc RegisterEnergyStore(MsgRegisterEnergyStore) returns (MsgRegisterEnergyStoreResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -19,6 +20,14 @@ message MsgRegisterSmartMeter {
 }
 
 message MsgRegisterSmartMeterResponse {
+}
+
+message MsgRegisterEnergyStore {
+  string creator = 1;
+  string description = 2;
+}
+
+message MsgRegisterEnergyStoreResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

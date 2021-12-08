@@ -20176,6 +20176,8 @@ definitions:
         format: int32
       description:
         type: string
+  kiprasdak.energija.energija.MsgRegisterEnergyStoreResponse:
+    type: object
   kiprasdak.energija.energija.MsgRegisterSmartMeterResponse:
     type: object
   kiprasdak.energija.energija.QueryAllEnergyStoreResponse:

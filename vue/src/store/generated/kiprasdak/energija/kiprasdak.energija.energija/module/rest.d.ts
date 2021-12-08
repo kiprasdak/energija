@@ -6,6 +6,7 @@ export interface EnergijaEnergyStore {
     reserved?: number;
     description?: string;
 }
+export declare type EnergijaMsgRegisterEnergyStoreResponse = object;
 export declare type EnergijaMsgRegisterSmartMeterResponse = object;
 export interface EnergijaQueryAllEnergyStoreResponse {
     energyStore?: EnergijaEnergyStore[];

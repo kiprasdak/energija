@@ -12,6 +12,13 @@ export interface MsgRegisterSmartMeter {
 
 export interface MsgRegisterSmartMeterResponse {}
 
+export interface MsgRegisterEnergyStore {
+  creator: string;
+  description: string;
+}
+
+export interface MsgRegisterEnergyStoreResponse {}
+
 const baseMsgRegisterSmartMeter: object = {
   creator: "",
   production: 0,
@@ -182,12 +189,145 @@ export const MsgRegisterSmartMeterResponse = {
   },
 };
 
+const baseMsgRegisterEnergyStore: object = { creator: "", description: "" };
+
+export const MsgRegisterEnergyStore = {
+  encode(
+    message: MsgRegisterEnergyStore,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.description !== "") {
+      writer.uint32(18).string(message.description);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgRegisterEnergyStore {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgRegisterEnergyStore } as MsgRegisterEnergyStore;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.description = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRegisterEnergyStore {
+    const message = { ...baseMsgRegisterEnergyStore } as MsgRegisterEnergyStore;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = String(object.description);
+    } else {
+      message.description = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgRegisterEnergyStore): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<MsgRegisterEnergyStore>
+  ): MsgRegisterEnergyStore {
+    const message = { ...baseMsgRegisterEnergyStore } as MsgRegisterEnergyStore;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    } else {
+      message.description = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgRegisterEnergyStoreResponse: object = {};
+
+export const MsgRegisterEnergyStoreResponse = {
+  encode(
+    _: MsgRegisterEnergyStoreResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgRegisterEnergyStoreResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgRegisterEnergyStoreResponse,
+    } as MsgRegisterEnergyStoreResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRegisterEnergyStoreResponse {
+    const message = {
+      ...baseMsgRegisterEnergyStoreResponse,
+    } as MsgRegisterEnergyStoreResponse;
+    return message;
+  },
+
+  toJSON(_: MsgRegisterEnergyStoreResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgRegisterEnergyStoreResponse>
+  ): MsgRegisterEnergyStoreResponse {
+    const message = {
+      ...baseMsgRegisterEnergyStoreResponse,
+    } as MsgRegisterEnergyStoreResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   RegisterSmartMeter(
     request: MsgRegisterSmartMeter
   ): Promise<MsgRegisterSmartMeterResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  RegisterEnergyStore(
+    request: MsgRegisterEnergyStore
+  ): Promise<MsgRegisterEnergyStoreResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -206,6 +346,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgRegisterSmartMeterResponse.decode(new Reader(data))
+    );
+  }
+
+  RegisterEnergyStore(
+    request: MsgRegisterEnergyStore
+  ): Promise<MsgRegisterEnergyStoreResponse> {
+    const data = MsgRegisterEnergyStore.encode(request).finish();
+    const promise = this.rpc.request(
+      "kiprasdak.energija.energija.Msg",
+      "RegisterEnergyStore",
+      data
+    );
+    return promise.then((data) =>
+      MsgRegisterEnergyStoreResponse.decode(new Reader(data))
     );
   }
 }
