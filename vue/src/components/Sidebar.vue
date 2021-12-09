@@ -1,33 +1,37 @@
 <template>
-  <SpSidebar v-on:sidebar-open="sidebarOpen = true" v-on:sidebar-close="sidebarOpen = false">
+  <SpSidebar
+    v-on:sidebar-open="sidebarOpen = true"
+    v-on:sidebar-close="sidebarOpen = false"
+  >
     <template v-slot:default>
       <SpLinkIcon link="/" text="Dashboard" icon="Dashboard" />
-      <SpLinkIcon link="/types" text="Custom Type" icon="Form" />
-      <SpLinkIcon link="/relayers" text="Relayers" icon="Transactions" />
       <div class="sp-dash"></div>
-      <SpLinkIcon href="https://github.com/tendermint/starport" target="_blank" text="Documentation" icon="Docs" />
+      <SpLinkIcon link="/energija" text="Energija" icon="Modules" />
+      <div class="sp-dash"></div>
+      <SpLinkIcon link="/simuliacija" text="Simuliacija" icon="Settings" />
     </template>
     <template v-slot:footer>
+      <SpLinkIcon link="/relayers" text="Relayers" icon="AddNew" />
+      <div class="sp-dash"></div>
       <SpStatusAPI :showText="sidebarOpen" />
       <SpStatusRPC :showText="sidebarOpen" />
       <SpStatusWS :showText="sidebarOpen" />
-      <div class="sp-text">Build: v0.3.8</div>
     </template>
   </SpSidebar>
 </template>
 
 <script>
 export default {
-  name: 'Sidebar',
+  name: "Sidebar",
   data() {
     return {
       sidebarOpen: true,
-    }
+    };
   },
   computed: {
     hasWallet() {
-      return this.$store.hasModule(['common', 'wallet'])
+      return this.$store.hasModule(["common", "wallet"]);
     },
   },
-}
+};
 </script>
