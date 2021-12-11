@@ -1,6 +1,10 @@
 <template>
   <div v-if="initialized">
-    <SpWallet ref="wallet" v-on:dropdown-opened="$refs.menu.closeDropdown()" />
+    <SpWallet
+      ref="wallet"
+      id="wallet"
+      v-on:dropdown-opened="$refs.menu.closeDropdown()"
+    />
     <SpLayout>
       <template v-slot:sidebar>
         <Sidebar />
@@ -19,9 +23,9 @@ body {
 </style>
 
 <script>
-import './scss/app.scss'
-import '@starport/vue/lib/starport-vue.css'
-import Sidebar from './components/Sidebar'
+import "./scss/app.scss";
+import "@starport/vue/lib/starport-vue.css";
+import Sidebar from "./components/Sidebar";
 
 export default {
   components: {
@@ -30,20 +34,20 @@ export default {
   data() {
     return {
       initialized: false,
-    }
+    };
   },
   computed: {
     hasWallet() {
-      return this.$store.hasModule(['common', 'wallet'])
+      return this.$store.hasModule(["common", "wallet"]);
     },
   },
   async created() {
-    await this.$store.dispatch('common/env/init')
-    this.initialized = true
+    await this.$store.dispatch("common/env/init");
+    this.initialized = true;
   },
   errorCaptured(err) {
-    console.log(err)
-    return false
+    console.log(err);
+    return false;
   },
-}
+};
 </script>

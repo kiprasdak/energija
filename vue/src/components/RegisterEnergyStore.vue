@@ -1,8 +1,8 @@
 <template>
   <div class="sp-token-send__header sp-component-title">
-    <h3>Protingo skaitliuko registracija</h3>
+    <h3>Energijos talpos registracija</h3>
     <span>|</span>
-    <span>Registracija vienam skaitliukui</span>
+    <span>Registracija vienai energijos talpai</span>
   </div>
   <div class="sp-component sp-welcome">
     <div class="sp-box sp-shadow sp-welcome__main">
@@ -11,7 +11,7 @@
         <div class="sp-token-send__main__rcpt__wrapper">
           <div class="flex-container">
             <div class="symbl-prod">
-              <span class="sp-icon sp-icon-Add"></span>
+              <span class="sp-icon sp-icon-Transactions"></span>
             </div>
             <div
               class="sp-token-send__main__rcpt__input sp-form-group flex-child"
@@ -21,13 +21,14 @@
                 v-model="production"
                 type="number"
                 min="0"
-                placeholder="Energijos produkcijos kiekis W/h"
+                :disabled="true"
+                placeholder="Talpinama energija W/h"
               />
             </div>
           </div>
           <div class="flex-container">
-            <div class="symbl-cons">
-              <span class="sp-icon sp-icon-DownArrow"></span>
+            <div class="symbl-prod">
+              <span class="sp-icon sp-icon-Lock"></span>
             </div>
             <div
               class="sp-token-send__main__rcpt__input sp-form-group flex-child"
@@ -37,7 +38,8 @@
                 v-model="consumption"
                 type="number"
                 min="0"
-                placeholder="Energijos vartojimo kiekis W/h"
+                :disabled="true"
+                placeholder="Rezervuota energija W/h"
               />
             </div>
           </div>
@@ -53,20 +55,21 @@
                 v-model="description"
                 type="text"
                 maxlength="96"
+                :disabled="this.isRegister"
                 placeholder="Protingo skaitliuko aprašymas"
               />
             </div>
           </div>
           <div class="sp-welcome__btns">
             <SpButton
-              @click="registerSmartMeter"
+              @click="registerEnergyStore"
               target="_blank"
               type="primary"
               :disabled="
                 this.$store.getters['common/wallet/address'] && this.isRegister
               "
               >Registruoti</SpButton
-            ><!--:disabled checks if wallet is unlocked  -->
+            ><!--:disabled checks if wallet is unlocked and if smartMeter is already registered -->
             <SpButton
               target="_blank"
               type="secondary"
@@ -81,16 +84,16 @@
 </template>
 <script>
 export default {
-  name: "RegisterSmartMeter",
+  name: "RegisterEnergyStore",
   data() {
     return {
-      isRegister: false,
+      isRegister: true,
     };
   },
   async mounted() {
     if (this._depsLoaded) {
       const ttt = await this.$store.dispatch(
-        "kiprasdak.energija.energija/QuerySmartMeter",
+        "kiprasdak.energija.energija/QueryEnergyStore",
         {
           params: {
             index: this.currentAccount,
@@ -125,43 +128,48 @@ export default {
         return false;
       }
     },
+    addrStore() {
+      if (this._depsLoaded) {
+        return this.$store.getters["common/wallet/address"];
+      } else {
+        return null;
+      }
+    },
   },
   methods: {
-    async registerSmartMeter() {
+    async registerEnergyStore() {
       var wallet = document.getElementById("wallet");
       wallet.addEventListener("webkitAnimationEnd", function () {
         this.style.webkitAnimationName = "";
       });
       const value = {
         creator: this.currentAccount,
-        production: this.production,
-        consumption: this.consumption,
         description: this.description,
       };
       if (this.loggedIn == false) {
         document.getElementById("wallet").style.animation = "shake linear 1s";
       } else {
         this.$store
-          .dispatch("kiprasdak.energija.energija/QuerySmartMeter", {
+          .dispatch("kiprasdak.energija.energija/QueryEnergyStore", {
             params: {
               index: this.currentAccount,
             },
           })
           .then((response) => {
             if (!response.ok) {
-              alert("Protingas skaitliukas jau užregistruotas");
-              return null;
+              alert("Energijos talpa jau užregistruotas");
+              return;
             }
           });
         await this.$store.dispatch(
-          "kiprasdak.energija.energija/sendMsgRegisterSmartMeter",
+          "kiprasdak.energija.energija/sendMsgRegisterEnergyStore",
           {
             value,
             fee: [],
             memo: [],
           }
         );
-        alert("Protingas skaitliukas sėkmingai užregistruotas");
+        alert("Energijos talpa sėkmingai užregistruotas");
         this.isRegister = true;
       }
     },

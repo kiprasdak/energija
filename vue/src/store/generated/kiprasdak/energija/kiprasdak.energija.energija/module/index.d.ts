@@ -1,15 +1,15 @@
 import { StdFee } from "@cosmjs/launchpad";
 import { OfflineSigner, EncodeObject } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgBuyOrder } from "./types/energija/tx";
-import { MsgCancelBuyOrder } from "./types/energija/tx";
-import { MsgTokenizeEnergy } from "./types/energija/tx";
-import { MsgCreatePair } from "./types/energija/tx";
-import { MsgRegisterEnergyStore } from "./types/energija/tx";
-import { MsgCancelSellOrder } from "./types/energija/tx";
-import { MsgRegisterSmartMeter } from "./types/energija/tx";
-import { MsgEnergizeToken } from "./types/energija/tx";
 import { MsgSellOrder } from "./types/energija/tx";
+import { MsgEnergizeToken } from "./types/energija/tx";
+import { MsgRegisterSmartMeter } from "./types/energija/tx";
+import { MsgCancelBuyOrder } from "./types/energija/tx";
+import { MsgCancelSellOrder } from "./types/energija/tx";
+import { MsgCreatePair } from "./types/energija/tx";
+import { MsgBuyOrder } from "./types/energija/tx";
+import { MsgRegisterEnergyStore } from "./types/energija/tx";
+import { MsgTokenizeEnergy } from "./types/energija/tx";
 export declare const MissingWalletError: Error;
 interface TxClientOptions {
     addr: string;
@@ -20,15 +20,15 @@ interface SignAndBroadcastOptions {
 }
 declare const txClient: (wallet: OfflineSigner, { addr: addr }?: TxClientOptions) => Promise<{
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }?: SignAndBroadcastOptions) => Promise<import("@cosmjs/stargate").BroadcastTxResponse>;
-    msgBuyOrder: (data: MsgBuyOrder) => EncodeObject;
-    msgCancelBuyOrder: (data: MsgCancelBuyOrder) => EncodeObject;
-    msgTokenizeEnergy: (data: MsgTokenizeEnergy) => EncodeObject;
-    msgCreatePair: (data: MsgCreatePair) => EncodeObject;
-    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore) => EncodeObject;
-    msgCancelSellOrder: (data: MsgCancelSellOrder) => EncodeObject;
-    msgRegisterSmartMeter: (data: MsgRegisterSmartMeter) => EncodeObject;
-    msgEnergizeToken: (data: MsgEnergizeToken) => EncodeObject;
     msgSellOrder: (data: MsgSellOrder) => EncodeObject;
+    msgEnergizeToken: (data: MsgEnergizeToken) => EncodeObject;
+    msgRegisterSmartMeter: (data: MsgRegisterSmartMeter) => EncodeObject;
+    msgCancelBuyOrder: (data: MsgCancelBuyOrder) => EncodeObject;
+    msgCancelSellOrder: (data: MsgCancelSellOrder) => EncodeObject;
+    msgCreatePair: (data: MsgCreatePair) => EncodeObject;
+    msgBuyOrder: (data: MsgBuyOrder) => EncodeObject;
+    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore) => EncodeObject;
+    msgTokenizeEnergy: (data: MsgTokenizeEnergy) => EncodeObject;
 }>;
 interface QueryClientOptions {
     addr: string;

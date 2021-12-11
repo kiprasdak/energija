@@ -15,3 +15,55 @@
     box-sizing: border-box;
   }
 }
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-child {
+  flex: 1 3 10em;
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+}
+
+.symbl-prod {
+  width: 4.4rem;
+  height: 4.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  background: rgb(10, 169, 73, 0.15);
+  color: $green;
+}
+
+.symbl-cons {
+  width: 4.4rem;
+  height: 4.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  background: rgba(242, 55, 55, 0.15);
+  color: $red;
+}
+
+.symbl-desc {
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 0.2rem solid #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+}
