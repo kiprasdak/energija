@@ -1,8 +1,8 @@
 <template>
   <div class="sp-token-send__header sp-component-title">
-    <h3>Energijos žetono kūrimas</h3>
+    <h3>Energijos žetono pavertimas į W/h</h3>
     <span>|</span>
-    <span>Žetonai kuriami pagal talpinamos energijos kiekį</span>
+    <span>Energija konvertuojama pagal turimą WATTH žetonų kiekį</span>
   </div>
   <div class="flex-container">
     <div class="sp-component sp-welcome flex-child">
@@ -11,7 +11,7 @@
         <div class="sp-token-send__main__form">
           <div class="sp-token-send__main__rcpt__wrapper">
             <div class="flex-container">
-              <div class="symbl-prod">
+              <div class="symbl-cons">
                 <span class="sp-icon sp-icon-Token"></span>
               </div>
               <div
@@ -26,18 +26,18 @@
                   v-model="amount"
                   type="number"
                   min="0"
-                  :max="stored"
-                  placeholder="Kuriamų žetonų kiekis W/h"
+                  :max="watth"
+                  placeholder="Kiekis žetonų paverčiamų į W/h"
                 />
               </div>
             </div>
             <div class="sp-welcome__btns">
               <SpButton
-                @click="tokenize"
+                @click="deTokenize"
                 target="_blank"
                 type="primary"
                 :disabled="false"
-                >Sukurti energijos žetonus</SpButton
+                >Versti žetonus į W/h</SpButton
               >
             </div>
           </div>
@@ -89,7 +89,7 @@ export default {
     },
   },
   created: async function () {
-    window.setInterval(() => this.getTokenValues(), 1000);
+    window.setInterval(() => this.getTokenValues(), 2000);
   },
   methods: {
     async getTokenValues() {
@@ -97,7 +97,9 @@ export default {
       this.stored = energyStore.energyStore.stored;
       const WATTH = await this.getWATTH();
       WATTH.balances.forEach((balance) => {
-        if (balance.denom === "watth") {
+        if (balance.denom !== "watth") {
+          this.watth = 0;
+        } else {
           this.watth = balance.amount;
         }
       });
@@ -122,7 +124,7 @@ export default {
       );
       return WATTH;
     },
-    async tokenize() {
+    async deTokenize() {
       var wallet = document.getElementById("wallet");
       wallet.addEventListener("webkitAnimationEnd", function () {
         this.style.webkitAnimationName = "";
@@ -148,13 +150,13 @@ export default {
           .catch((err) => {
             console.log(err);
             console.log("err ^");
-            alert("Energijos talpa neegzistuoja");
+            alert("Klaida");
             return false;
           });
         const isES = await isEnergyStore;
         if (isES == true) {
           await this.$store.dispatch(
-            "kiprasdak.energija.energija/sendMsgTokenizeEnergy",
+            "kiprasdak.energija.energija/sendMsgEnergizeToken",
             {
               value,
               fee: [],
@@ -167,7 +169,6 @@ export default {
               this.watth = balance.amount;
             }
           });
-          alert("Energijos žetonai sukurti sėkmingai");
         }
       }
     },

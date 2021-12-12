@@ -25,7 +25,9 @@
 .flex-child {
   flex: 1 3 10em;
 }
-
+.flex-child-second {
+  flex: 1 3 10em;
+}
 .flex-child:first-child {
   margin-right: 20px;
 }
@@ -56,6 +58,13 @@
 
 .tokens {
   height: 15.4rem;
+}
+
+.btn-buy {
+  background: rgba(0, 255, 34, 0.15);
+}
+.btn-sell {
+  background: rgba(255, 0, 0, 0.15);
 }
 
 .symbl-cons {

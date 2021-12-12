@@ -89,7 +89,7 @@ export default {
     },
   },
   created: async function () {
-    window.setInterval(() => this.getTokenValues(), 1000);
+    window.setInterval(() => this.getTokenValues(), 2000);
   },
   methods: {
     async getTokenValues() {
@@ -167,7 +167,6 @@ export default {
               this.watth = balance.amount;
             }
           });
-          alert("Energijos žetonai sukurti sėkmingai");
         }
       }
     },

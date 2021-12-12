@@ -50,7 +50,7 @@ func (k Keeper) UnreserveEnergy(ctx sdk.Context, index string, amount int32) err
 	}
 	updatedEnergyStore := types.EnergyStore{
 		Index:       index,
-		Stored:      stored,
+		Stored:      energyStore.Stored + stored,
 		Reserved:    energyStore.Reserved - stored,
 		Description: energyStore.Description,
 	}
