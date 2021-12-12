@@ -62,11 +62,9 @@
               @click="registerSmartMeter"
               target="_blank"
               type="primary"
-              :disabled="
-                this.$store.getters['common/wallet/address'] && this.isRegister
-              "
+              :disabled="false"
               >Registruoti</SpButton
-            ><!--:disabled checks if wallet is unlocked  -->
+            >
             <SpButton
               target="_blank"
               type="secondary"
@@ -82,30 +80,6 @@
 <script>
 export default {
   name: "RegisterSmartMeter",
-  data() {
-    return {
-      isRegister: false,
-    };
-  },
-  async mounted() {
-    if (this._depsLoaded) {
-      const ttt = await this.$store.dispatch(
-        "kiprasdak.energija.energija/QuerySmartMeter",
-        {
-          params: {
-            index: this.currentAccount,
-          },
-        }
-      );
-      if (ttt) {
-        this.isRegister = true;
-        console.log(Boolean(ttt));
-      } else {
-        this.isRegister = false;
-        console.log(Boolean(ttt));
-      }
-    }
-  },
   computed: {
     currentAccount() {
       if (this._depsLoaded) {
@@ -141,28 +115,35 @@ export default {
       if (this.loggedIn == false) {
         document.getElementById("wallet").style.animation = "shake linear 1s";
       } else {
-        this.$store
+        var isSmartMeterRegistered = this.$store
           .dispatch("kiprasdak.energija.energija/QuerySmartMeter", {
             params: {
               index: this.currentAccount,
             },
           })
           .then((response) => {
-            if (!response.ok) {
-              alert("Protingas skaitliukas jau užregistruotas");
-              return null;
-            }
+            console.log(response);
+            console.log("response ^");
+            alert("Protingas skaitliukas jau užregistruotas");
+            return true;
+          })
+          .catch((err) => {
+            console.log(err);
+            console.log("err ^");
+            return false;
           });
-        await this.$store.dispatch(
-          "kiprasdak.energija.energija/sendMsgRegisterSmartMeter",
-          {
-            value,
-            fee: [],
-            memo: [],
-          }
-        );
-        alert("Protingas skaitliukas sėkmingai užregistruotas");
-        this.isRegister = true;
+        const isSMR = await isSmartMeterRegistered;
+        if (isSMR == false) {
+          await this.$store.dispatch(
+            "kiprasdak.energija.energija/sendMsgRegisterSmartMeter",
+            {
+              value,
+              fee: [],
+              memo: [],
+            }
+          );
+          alert("Protingas skaitliukas sėkmingai užregistruotas");
+        }
       }
     },
   },

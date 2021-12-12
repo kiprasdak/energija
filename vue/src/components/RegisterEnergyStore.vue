@@ -55,7 +55,6 @@
                 v-model="description"
                 type="text"
                 maxlength="96"
-                :disabled="this.isRegister"
                 placeholder="Protingo skaitliuko aprašymas"
               />
             </div>
@@ -65,11 +64,9 @@
               @click="registerEnergyStore"
               target="_blank"
               type="primary"
-              :disabled="
-                this.$store.getters['common/wallet/address'] && this.isRegister
-              "
+              :disabled="false"
               >Registruoti</SpButton
-            ><!--:disabled checks if wallet is unlocked and if smartMeter is already registered -->
+            >
             <SpButton
               target="_blank"
               type="secondary"
@@ -85,30 +82,6 @@
 <script>
 export default {
   name: "RegisterEnergyStore",
-  data() {
-    return {
-      isRegister: true,
-    };
-  },
-  async mounted() {
-    if (this._depsLoaded) {
-      const ttt = await this.$store.dispatch(
-        "kiprasdak.energija.energija/QueryEnergyStore",
-        {
-          params: {
-            index: this.currentAccount,
-          },
-        }
-      );
-      if (ttt) {
-        this.isRegister = true;
-        console.log(Boolean(ttt));
-      } else {
-        this.isRegister = false;
-        console.log(Boolean(ttt));
-      }
-    }
-  },
   computed: {
     currentAccount() {
       if (this._depsLoaded) {
@@ -128,13 +101,6 @@ export default {
         return false;
       }
     },
-    addrStore() {
-      if (this._depsLoaded) {
-        return this.$store.getters["common/wallet/address"];
-      } else {
-        return null;
-      }
-    },
   },
   methods: {
     async registerEnergyStore() {
@@ -149,28 +115,36 @@ export default {
       if (this.loggedIn == false) {
         document.getElementById("wallet").style.animation = "shake linear 1s";
       } else {
-        this.$store
+        var isEnergyStoreRegistered = this.$store
           .dispatch("kiprasdak.energija.energija/QueryEnergyStore", {
             params: {
               index: this.currentAccount,
             },
           })
           .then((response) => {
-            if (!response.ok) {
-              alert("Energijos talpa jau užregistruotas");
-              return;
-            }
+            console.log(response);
+            console.log("response ^");
+            alert("Energijos talpa jau užregistruotas");
+            return true;
+          })
+          .catch((err) => {
+            console.log(err);
+            console.log("err ^");
+            return false;
           });
-        await this.$store.dispatch(
-          "kiprasdak.energija.energija/sendMsgRegisterEnergyStore",
-          {
-            value,
-            fee: [],
-            memo: [],
-          }
-        );
-        alert("Energijos talpa sėkmingai užregistruotas");
-        this.isRegister = true;
+        const isESR = await isEnergyStoreRegistered;
+        if (isESR == false) {
+          await this.$store.dispatch(
+            "kiprasdak.energija.energija/sendMsgRegisterEnergyStore",
+            {
+              value,
+              fee: [],
+              memo: [],
+            }
+          );
+          alert("Energijos talpa sėkmingai užregistruotas");
+          this.isRegister = true;
+        }
       }
     },
   },
