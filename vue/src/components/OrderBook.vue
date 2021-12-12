@@ -121,10 +121,87 @@
       </div>
     </div>
   </div>
+  <div class="flex-container">
+    <div class="sp-component sp-welcome flex-child">
+      <div class="sp-box sp-shadow sp-welcome__main">
+        <div class="sp-token-send__main__form">
+          <div class="sp-token-send__main__rcpt__wrapper">
+            <div class="flex-container">
+              <div class="symbl-invisible">
+                <span class="sp"></span>
+              </div>
+              <div
+                class="
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child
+                "
+              ></div>
+              <div
+                class="
+                  sp-bold
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child
+                "
+              >
+                Kiekis
+              </div>
+              <div
+                class="
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child
+                "
+              >
+                <div></div>
+              </div>
+              <div
+                class="
+                  sp-bold
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child-second
+                "
+              >
+                Kaina
+              </div>
+            </div>
+            <div
+              class="order-gap"
+              id="buyOrderList"
+              v-for="order in buyOrders"
+              v-bind:key="order"
+            >
+              {{ test }}
+              <BuyOrder :amount="order[0]" :price="order[1]" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sp-component sp-welcome flex-child">
+      <div class="sp-box sp-shadow sp-welcome__main">
+        <div class="sp-token-send__main__form">
+          <div class="sp-token-send__main__rcpt__wrapper">
+            <div class="flex-container">
+              <div class="symbl-cons">
+                <span class="sp-icon sp-icon-DownArrow"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
+import BuyOrder from "./BuyOrder.vue";
 export default {
   name: "OrderBook",
+  components: {
+    BuyOrder,
+  },
   data() {
     return {
       stored: 0,
@@ -133,6 +210,7 @@ export default {
       sprice: 0,
       bamount: 0,
       bprice: 0,
+      buyOrders: [[20, 30]],
     };
   },
   computed: {
@@ -156,9 +234,33 @@ export default {
     },
   },
   created: async function () {
-    await this.createTradingPair();
+    window.setInterval(() => this.createBuyOrderList(), 2000);
   },
   methods: {
+    async createBuyOrderList() {
+      await this.createTradingPair();
+      const buyOrders = await this.getBuyOrders();
+      var buyOrdersArray = [];
+      buyOrders.buyOrderBook.book.orders.forEach((order) => {
+        if (this.buyOrder.length < 10) {
+          buyOrdersArray.push([order.amount, order.price]);
+        } else {
+          return;
+        }
+      });
+      this.buyOrders = buyOrdersArray;
+    },
+    async getBuyOrders() {
+      const buyOrders = await this.$store.dispatch(
+        "kiprasdak.energija.energija/QueryBuyOrderBook",
+        {
+          params: {
+            index: "watth-token",
+          },
+        }
+      );
+      return buyOrders;
+    },
     async getTokenValues() {
       const energyStore = await this.getEnergyStore();
       this.stored = energyStore.energyStore.stored;

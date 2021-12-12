@@ -353,48 +353,18 @@ export default {
 		},
 		
 		
-		async sendMsgCancelBuyOrder({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgTokenizeEnergy({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCancelBuyOrder(value)
+				const msg = await txClient.msgTokenizeEnergy(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgCancelSellOrder({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCancelSellOrder(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCancelSellOrder:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCancelSellOrder:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgRegisterSmartMeter({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgRegisterSmartMeter(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Send', 'Could not broadcast Tx: '+ e.message)
+					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Send', 'Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -413,33 +383,48 @@ export default {
 				}
 			}
 		},
-		async sendMsgTokenizeEnergy({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgCancelBuyOrder({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgTokenizeEnergy(value)
+				const msg = await txClient.msgCancelBuyOrder(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Send', 'Could not broadcast Tx: '+ e.message)
+					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Send', 'Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
-		async sendMsgCreatePair({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgRegisterSmartMeter({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreatePair(value)
+				const msg = await txClient.msgRegisterSmartMeter(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreatePair:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgCreatePair:Send', 'Could not broadcast Tx: '+ e.message)
+					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Send', 'Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgEnergizeToken({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgEnergizeToken(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new SpVuexError('TxClient:MsgEnergizeToken:Init', 'Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new SpVuexError('TxClient:MsgEnergizeToken:Send', 'Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -473,60 +458,47 @@ export default {
 				}
 			}
 		},
-		async sendMsgEnergizeToken({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgCreatePair({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgEnergizeToken(value)
+				const msg = await txClient.msgCreatePair(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgEnergizeToken:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgCreatePair:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgEnergizeToken:Send', 'Could not broadcast Tx: '+ e.message)
+					throw new SpVuexError('TxClient:MsgCreatePair:Send', 'Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
-		
-		async MsgCancelBuyOrder({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCancelBuyOrder(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Create', 'Could not create message: ' + e.message)
-					
-				}
-			}
-		},
-		async MsgCancelSellOrder({ rootGetters }, { value }) {
+		async sendMsgCancelSellOrder({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgCancelSellOrder(value)
-				return msg
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
 					throw new SpVuexError('TxClient:MsgCancelSellOrder:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgCancelSellOrder:Create', 'Could not create message: ' + e.message)
-					
+					throw new SpVuexError('TxClient:MsgCancelSellOrder:Send', 'Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
-		async MsgRegisterSmartMeter({ rootGetters }, { value }) {
+		
+		async MsgTokenizeEnergy({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgRegisterSmartMeter(value)
+				const msg = await txClient.msgTokenizeEnergy(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Create', 'Could not create message: ' + e.message)
+					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Create', 'Could not create message: ' + e.message)
 					
 				}
 			}
@@ -545,30 +517,44 @@ export default {
 				}
 			}
 		},
-		async MsgTokenizeEnergy({ rootGetters }, { value }) {
+		async MsgCancelBuyOrder({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgTokenizeEnergy(value)
+				const msg = await txClient.msgCancelBuyOrder(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgTokenizeEnergy:Create', 'Could not create message: ' + e.message)
+					throw new SpVuexError('TxClient:MsgCancelBuyOrder:Create', 'Could not create message: ' + e.message)
 					
 				}
 			}
 		},
-		async MsgCreatePair({ rootGetters }, { value }) {
+		async MsgRegisterSmartMeter({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreatePair(value)
+				const msg = await txClient.msgRegisterSmartMeter(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreatePair:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgCreatePair:Create', 'Could not create message: ' + e.message)
+					throw new SpVuexError('TxClient:MsgRegisterSmartMeter:Create', 'Could not create message: ' + e.message)
+					
+				}
+			}
+		},
+		async MsgEnergizeToken({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgEnergizeToken(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new SpVuexError('TxClient:MsgEnergizeToken:Init', 'Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new SpVuexError('TxClient:MsgEnergizeToken:Create', 'Could not create message: ' + e.message)
 					
 				}
 			}
@@ -601,16 +587,30 @@ export default {
 				}
 			}
 		},
-		async MsgEnergizeToken({ rootGetters }, { value }) {
+		async MsgCreatePair({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgEnergizeToken(value)
+				const msg = await txClient.msgCreatePair(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgEnergizeToken:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new SpVuexError('TxClient:MsgCreatePair:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgEnergizeToken:Create', 'Could not create message: ' + e.message)
+					throw new SpVuexError('TxClient:MsgCreatePair:Create', 'Could not create message: ' + e.message)
+					
+				}
+			}
+		},
+		async MsgCancelSellOrder({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCancelSellOrder(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new SpVuexError('TxClient:MsgCancelSellOrder:Init', 'Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new SpVuexError('TxClient:MsgCancelSellOrder:Create', 'Could not create message: ' + e.message)
 					
 				}
 			}
