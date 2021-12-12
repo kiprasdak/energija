@@ -4,6 +4,7 @@ import Types from "@/views/Types.vue";
 import Relayers from "@/views/Relayers.vue";
 import Energija from "@/views/Energija.vue";
 import Simuliacija from "@/views/Simuliacija.vue";
+import Birza from "@/views/Birza.vue";
 
 const routerHistory = createWebHistory();
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
   { path: "/relayers", component: Relayers },
   { path: "/energija", component: Energija },
   { path: "/simuliacija", component: Simuliacija },
+  { path: "/birza", component: Birza },
 ];
 
 const router = createRouter({

@@ -67,12 +67,6 @@
               :disabled="false"
               >Registruoti</SpButton
             >
-            <SpButton
-              target="_blank"
-              type="secondary"
-              class="sp-welcome__btns__github"
-              >Secondary</SpButton
-            >
           </div>
         </div>
       </div>

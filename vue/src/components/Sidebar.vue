@@ -8,6 +8,8 @@
       <div class="sp-dash"></div>
       <SpLinkIcon link="/energija" text="Energija" icon="Modules" />
       <div class="sp-dash"></div>
+      <SpLinkIcon link="/birza" text="Birža" icon="Token" />
+      <div class="sp-dash"></div>
       <SpLinkIcon link="/simuliacija" text="Simuliacija" icon="Settings" />
     </template>
     <template v-slot:footer>

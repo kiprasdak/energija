@@ -1,14 +1,17 @@
 <template>
   <div>
     <div class="container">
-      <SpWelcome />
+      <Devices />
+      <Tokenize />
     </div>
   </div>
 </template>
 
 <script>
+import Devices from "@/components/Devices.vue";
+import Tokenize from "@/components/Tokenize.vue";
 export default {
   name: "Energija",
-  components: {},
+  components: { Devices, Tokenize },
 };
 </script>

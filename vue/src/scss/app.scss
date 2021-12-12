@@ -42,9 +42,36 @@
   background: rgb(10, 169, 73, 0.15);
   color: $green;
 }
+.symbl-prod-text {
+  display: flex;
+  height: 4.4rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  background: rgb(10, 169, 73, 0.15);
+  color: $green;
+}
+
+.tokens {
+  height: 15.4rem;
+}
 
 .symbl-cons {
   width: 4.4rem;
+  height: 4.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  background: rgba(242, 55, 55, 0.15);
+  color: $red;
+}
+
+.symbl-cons-text {
   height: 4.4rem;
   display: flex;
   justify-content: center;
