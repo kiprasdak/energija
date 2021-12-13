@@ -81,7 +81,7 @@
               </div>
               <div>
                 <SpButton
-                  @click="Order"
+                  @click="closeAllOrders"
                   target="_blank"
                   type="secondary"
                   :disabled="false"
@@ -90,15 +90,25 @@
               </div>
             </div>
             <div
-              class="order-gap"
               id="buyOrderList"
-              v-for="currOrder in currOrders"
-              v-bind:key="currOrder"
+              v-for="currBOrder in currBOrders"
+              v-bind:key="currBOrder"
             >
               <CurrentBuyOrders
-                :id="currOrder[0]"
-                :amount="currOrder[1]"
-                :price="currOrder[2]"
+                :id="currBOrder[0]"
+                :amount="currBOrder[1]"
+                :price="currBOrder[2]"
+              />
+            </div>
+            <div
+              id="sellOrderList"
+              v-for="currSOrder in currSOrders"
+              v-bind:key="currSOrder"
+            >
+              <CurrentSellOrders
+                :id="currSOrder[0]"
+                :amount="currSOrder[1]"
+                :price="currSOrder[2]"
               />
             </div>
           </div>
@@ -110,31 +120,105 @@
 
 <script>
 import CurrentBuyOrders from "./CurrentBuyOrders.vue";
+import CurrentSellOrders from "./CurrentSellOrders.vue";
 export default {
   name: "CurrentOrders",
   components: {
     CurrentBuyOrders,
+    CurrentSellOrders,
   },
   data() {
     return {
-      currOrders: [
+      currBOrders: [
+        [1, 22, 33],
+        [2, 33, 44],
+        [3, 44, 55],
+      ],
+      currSOrders: [
         [1, 22, 33],
         [2, 33, 44],
         [3, 44, 55],
       ],
     };
   },
+  computed: {
+    currentAccount() {
+      if (this._depsLoaded) {
+        if (this.loggedIn) {
+          return this.$store.getters["common/wallet/address"];
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    },
+    loggedIn() {
+      if (this._depsLoaded) {
+        return this.$store.getters["common/wallet/loggedIn"];
+      } else {
+        return false;
+      }
+    },
+  },
   created: async function () {
     await this.createCurrentBuyOrderList();
+    await this.createCurrentSellOrderList();
   },
   methods: {
+    async closeAllOrders() {
+      const buyOrders = await this.getBuyOrders();
+      const sellOrders = await this.getSellOrders();
+      buyOrders.buyOrderBook.book.orders.forEach((order) => {
+        if (order.creator === this.currentAccount) {
+          this.closeBuyOrder(order.id);
+        }
+      });
+      sellOrders.sellOrderBook.book.orders.forEach((order) => {
+        if (order.creator === this.currentAccount) {
+          this.closeSellOrder(order.id);
+        }
+      });
+    },
+    async closeBuyOrder(id_to_close) {
+      const value = {
+        creator: this.currentAccount,
+        amountDenom: "watth",
+        priceDenom: "token",
+        orderID: id_to_close,
+      };
+      await this.$store.dispatch(
+        "kiprasdak.energija.energija/sendMsgCancelBuyOrder",
+        {
+          value,
+          fee: [],
+          memo: [],
+        }
+      );
+    },
+    async closeSellOrder(id_to_close) {
+      const value = {
+        creator: this.currentAccount,
+        amountDenom: "watth",
+        priceDenom: "token",
+        orderID: id_to_close,
+      };
+      await this.$store.dispatch(
+        "kiprasdak.energija.energija/sendMsgCancelSellOrder",
+        {
+          value,
+          fee: [],
+          memo: [],
+        }
+      );
+    },
     async createCurrentBuyOrderList() {
       const buyOrders = await this.getBuyOrders();
       var buyOrdersArray = [];
       buyOrders.buyOrderBook.book.orders.forEach((order) => {
         buyOrdersArray.push([order.id, order.amount, order.price]);
       });
-      this.currOrders = buyOrdersArray;
+      this.currBOrders = buyOrdersArray;
       buyOrdersArray = [];
     },
     async getBuyOrders() {
@@ -147,6 +231,26 @@ export default {
         }
       );
       return buyOrders;
+    },
+    async createCurrentSellOrderList() {
+      const sellOrders = await this.getSellOrders();
+      var sellOrdersArray = [];
+      sellOrders.sellOrderBook.book.orders.forEach((order) => {
+        sellOrdersArray.push([order.id, order.amount, order.price]);
+      });
+      this.currSOrders = sellOrdersArray;
+      sellOrdersArray = [];
+    },
+    async getSellOrders() {
+      const sellOrders = await this.$store.dispatch(
+        "kiprasdak.energija.energija/QuerySellOrderBook",
+        {
+          params: {
+            index: "watth-token",
+          },
+        }
+      );
+      return sellOrders;
     },
   },
 };

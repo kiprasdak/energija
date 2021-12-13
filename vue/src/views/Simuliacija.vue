@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="container">
-      <SpWelcome />
       <RegisterSmartMeter />
       <RegisterEnergyStore />
     </div>
