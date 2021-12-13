@@ -129,16 +129,8 @@ export default {
   },
   data() {
     return {
-      currBOrders: [
-        [1, 22, 33],
-        [2, 33, 44],
-        [3, 44, 55],
-      ],
-      currSOrders: [
-        [1, 22, 33],
-        [2, 33, 44],
-        [3, 44, 55],
-      ],
+      currBOrders: [],
+      currSOrders: [],
     };
   },
   computed: {
@@ -216,7 +208,9 @@ export default {
       const buyOrders = await this.getBuyOrders();
       var buyOrdersArray = [];
       buyOrders.buyOrderBook.book.orders.forEach((order) => {
-        buyOrdersArray.push([order.id, order.amount, order.price]);
+        if (order.creator === this.currentAccount) {
+          buyOrdersArray.push([order.id, order.amount, order.price]);
+        }
       });
       this.currBOrders = buyOrdersArray;
       buyOrdersArray = [];
@@ -236,7 +230,9 @@ export default {
       const sellOrders = await this.getSellOrders();
       var sellOrdersArray = [];
       sellOrders.sellOrderBook.book.orders.forEach((order) => {
-        sellOrdersArray.push([order.id, order.amount, order.price]);
+        if (order.creator === this.currentAccount) {
+          sellOrdersArray.push([order.id, order.amount, order.price]);
+        }
       });
       this.currSOrders = sellOrdersArray;
       sellOrdersArray = [];
