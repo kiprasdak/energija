@@ -1,4 +1,6 @@
 # energija
+<img width="1265" alt="image" src="https://user-images.githubusercontent.com/52536316/145856297-77460809-8335-4795-b3ab-a7a9fd81e8ba.png">
+
 **energija** is a blockchain built using Cosmos SDK and Tendermint and created with [Starport](https://github.com/tendermint/starport).
 
 ## Get started
