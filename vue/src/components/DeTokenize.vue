@@ -89,7 +89,8 @@ export default {
     },
   },
   created: async function () {
-    window.setInterval(() => this.getTokenValues(), 2000);
+    // window.setInterval(() => this.getTokenValues(), 2000);
+    await this.getTokenValues();
   },
   methods: {
     async getTokenValues() {

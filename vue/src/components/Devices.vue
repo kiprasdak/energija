@@ -152,7 +152,8 @@ export default {
     },
   },
   created: async function () {
-    window.setInterval(() => this.getDeviceValues(), 2000);
+    // window.setInterval(() => this.getDeviceValues(), 2000);
+    await this.getDeviceValues();
   },
   methods: {
     async getDeviceValues() {

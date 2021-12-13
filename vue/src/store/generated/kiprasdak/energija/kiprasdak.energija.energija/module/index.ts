@@ -4,27 +4,27 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgTokenizeEnergy } from "./types/energija/tx";
-import { MsgRegisterEnergyStore } from "./types/energija/tx";
-import { MsgCancelBuyOrder } from "./types/energija/tx";
-import { MsgRegisterSmartMeter } from "./types/energija/tx";
-import { MsgEnergizeToken } from "./types/energija/tx";
-import { MsgBuyOrder } from "./types/energija/tx";
 import { MsgSellOrder } from "./types/energija/tx";
-import { MsgCreatePair } from "./types/energija/tx";
 import { MsgCancelSellOrder } from "./types/energija/tx";
+import { MsgEnergizeToken } from "./types/energija/tx";
+import { MsgRegisterSmartMeter } from "./types/energija/tx";
+import { MsgCancelBuyOrder } from "./types/energija/tx";
+import { MsgCreatePair } from "./types/energija/tx";
+import { MsgRegisterEnergyStore } from "./types/energija/tx";
+import { MsgTokenizeEnergy } from "./types/energija/tx";
+import { MsgBuyOrder } from "./types/energija/tx";
 
 
 const types = [
-  ["/kiprasdak.energija.energija.MsgTokenizeEnergy", MsgTokenizeEnergy],
-  ["/kiprasdak.energija.energija.MsgRegisterEnergyStore", MsgRegisterEnergyStore],
-  ["/kiprasdak.energija.energija.MsgCancelBuyOrder", MsgCancelBuyOrder],
-  ["/kiprasdak.energija.energija.MsgRegisterSmartMeter", MsgRegisterSmartMeter],
-  ["/kiprasdak.energija.energija.MsgEnergizeToken", MsgEnergizeToken],
-  ["/kiprasdak.energija.energija.MsgBuyOrder", MsgBuyOrder],
   ["/kiprasdak.energija.energija.MsgSellOrder", MsgSellOrder],
-  ["/kiprasdak.energija.energija.MsgCreatePair", MsgCreatePair],
   ["/kiprasdak.energija.energija.MsgCancelSellOrder", MsgCancelSellOrder],
+  ["/kiprasdak.energija.energija.MsgEnergizeToken", MsgEnergizeToken],
+  ["/kiprasdak.energija.energija.MsgRegisterSmartMeter", MsgRegisterSmartMeter],
+  ["/kiprasdak.energija.energija.MsgCancelBuyOrder", MsgCancelBuyOrder],
+  ["/kiprasdak.energija.energija.MsgCreatePair", MsgCreatePair],
+  ["/kiprasdak.energija.energija.MsgRegisterEnergyStore", MsgRegisterEnergyStore],
+  ["/kiprasdak.energija.energija.MsgTokenizeEnergy", MsgTokenizeEnergy],
+  ["/kiprasdak.energija.energija.MsgBuyOrder", MsgBuyOrder],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -53,15 +53,15 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgTokenizeEnergy: (data: MsgTokenizeEnergy): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgTokenizeEnergy", value: data }),
-    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgRegisterEnergyStore", value: data }),
-    msgCancelBuyOrder: (data: MsgCancelBuyOrder): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgCancelBuyOrder", value: data }),
-    msgRegisterSmartMeter: (data: MsgRegisterSmartMeter): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgRegisterSmartMeter", value: data }),
-    msgEnergizeToken: (data: MsgEnergizeToken): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgEnergizeToken", value: data }),
-    msgBuyOrder: (data: MsgBuyOrder): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgBuyOrder", value: data }),
     msgSellOrder: (data: MsgSellOrder): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgSellOrder", value: data }),
-    msgCreatePair: (data: MsgCreatePair): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgCreatePair", value: data }),
     msgCancelSellOrder: (data: MsgCancelSellOrder): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgCancelSellOrder", value: data }),
+    msgEnergizeToken: (data: MsgEnergizeToken): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgEnergizeToken", value: data }),
+    msgRegisterSmartMeter: (data: MsgRegisterSmartMeter): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgRegisterSmartMeter", value: data }),
+    msgCancelBuyOrder: (data: MsgCancelBuyOrder): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgCancelBuyOrder", value: data }),
+    msgCreatePair: (data: MsgCreatePair): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgCreatePair", value: data }),
+    msgRegisterEnergyStore: (data: MsgRegisterEnergyStore): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgRegisterEnergyStore", value: data }),
+    msgTokenizeEnergy: (data: MsgTokenizeEnergy): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgTokenizeEnergy", value: data }),
+    msgBuyOrder: (data: MsgBuyOrder): EncodeObject => ({ typeUrl: "/kiprasdak.energija.energija.MsgBuyOrder", value: data }),
     
   };
 };

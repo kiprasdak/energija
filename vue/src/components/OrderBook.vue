@@ -121,7 +121,7 @@
       </div>
     </div>
   </div>
-  <div class="flex-container">
+  <div class="flex-container-top">
     <div class="sp-component sp-welcome flex-child">
       <div class="sp-box sp-shadow sp-welcome__main">
         <div class="sp-token-send__main__form">
@@ -185,9 +185,54 @@
         <div class="sp-token-send__main__form">
           <div class="sp-token-send__main__rcpt__wrapper">
             <div class="flex-container">
-              <div class="symbl-cons">
-                <span class="sp-icon sp-icon-DownArrow"></span>
+              <div class="symbl-invisible">
+                <span class="sp"></span>
               </div>
+              <div
+                class="
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child
+                "
+              ></div>
+              <div
+                class="
+                  sp-bold
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child
+                "
+              >
+                Kiekis
+              </div>
+              <div
+                class="
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child
+                "
+              >
+                <div></div>
+              </div>
+              <div
+                class="
+                  sp-bold
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child-second
+                "
+              >
+                Kaina
+              </div>
+            </div>
+            <div
+              class="order-gap"
+              id="buyOrderList"
+              v-for="order in sellOrders"
+              v-bind:key="order"
+            >
+              {{ test }}
+              <SellOrder :amount="order[0]" :price="order[1]" />
             </div>
           </div>
         </div>
@@ -197,10 +242,12 @@
 </template>
 <script>
 import BuyOrder from "./BuyOrder.vue";
+import SellOrder from "./SellOrder.vue";
 export default {
   name: "OrderBook",
   components: {
     BuyOrder,
+    SellOrder,
   },
   data() {
     return {
@@ -210,7 +257,8 @@ export default {
       sprice: 0,
       bamount: 0,
       bprice: 0,
-      buyOrders: [[20, 30]],
+      buyOrders: [],
+      sellOrders: [],
     };
   },
   computed: {
@@ -234,21 +282,49 @@ export default {
     },
   },
   created: async function () {
-    window.setInterval(() => this.createBuyOrderList(), 2000);
+    // window.setInterval(() => this.createBuyOrderList(), 2000);
+    await this.createSellOrderList();
+    await this.createBuyOrderList();
   },
   methods: {
+    async createSellOrderList() {
+      await this.createTradingPair();
+      const sellOrders = await this.getSellOrders();
+      var sellOrdersArray = [];
+      sellOrders.sellOrderBook.book.orders.forEach((order) => {
+        if (sellOrdersArray.length < 10) {
+          sellOrdersArray.push([order.amount, order.price]);
+        } else {
+          return;
+        }
+      });
+      this.sellOrders = sellOrdersArray;
+      sellOrdersArray = [];
+    },
+    async getSellOrders() {
+      const sellOrders = await this.$store.dispatch(
+        "kiprasdak.energija.energija/QuerySellOrderBook",
+        {
+          params: {
+            index: "watth-token",
+          },
+        }
+      );
+      return sellOrders;
+    },
     async createBuyOrderList() {
       await this.createTradingPair();
       const buyOrders = await this.getBuyOrders();
       var buyOrdersArray = [];
-      buyOrders.buyOrderBook.book.orders.forEach((order) => {
-        if (this.buyOrder.length < 10) {
+      buyOrders.buyOrderBook.book.orders.reverse().forEach((order) => {
+        if (buyOrdersArray.length < 10) {
           buyOrdersArray.push([order.amount, order.price]);
         } else {
           return;
         }
       });
       this.buyOrders = buyOrdersArray;
+      buyOrdersArray = [];
     },
     async getBuyOrders() {
       const buyOrders = await this.$store.dispatch(
