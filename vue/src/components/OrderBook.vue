@@ -154,7 +154,7 @@
                   flex-child
                 "
               >
-                <div></div>
+                <div>◾◾◾</div>
               </div>
               <div
                 class="
@@ -173,7 +173,6 @@
               v-for="order in buyOrders"
               v-bind:key="order"
             >
-              {{ test }}
               <BuyOrder :amount="order[0]" :price="order[1]" />
             </div>
           </div>
@@ -212,7 +211,7 @@
                   flex-child
                 "
               >
-                <div></div>
+                <div>◾◾◾</div>
               </div>
               <div
                 class="
