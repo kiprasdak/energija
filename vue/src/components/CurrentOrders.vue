@@ -1,4 +1,9 @@
 <template>
+  <div class="sp-token-send__header sp-component-title">
+    <h3>Aktyvūs užsakymai</h3>
+    <span>|</span>
+    <span>Aktyvių užsakymų pateikimas ir valdymas</span>
+  </div>
   <div class="order-gap"></div>
   <div class="flex-container-top">
     <div class="sp-component sp-welcome flex-child">
@@ -85,7 +90,7 @@
                   target="_blank"
                   type="secondary"
                   :disabled="false"
-                  >Uždaryti visus</SpButton
+                  >Atšaukti visus</SpButton
                 >
               </div>
             </div>

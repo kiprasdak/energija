@@ -47,7 +47,7 @@
         target="_blank"
         type="secondary"
         :disabled="false"
-        >Uždaryti</SpButton
+        >Atšaukti</SpButton
       >
     </div>
   </div>
