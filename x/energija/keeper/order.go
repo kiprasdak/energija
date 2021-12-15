@@ -169,7 +169,8 @@ func (k Keeper) ProcessBuyOrder(ctx sdk.Context, pairIndex string, creator strin
 	for _, liquidation := range liquidation {
 		liquidation := liquidation
 		creatorAddr, _ := sdk.AccAddressFromBech32(liquidation.Creator)
-		coins := sdk.NewCoins(sdk.NewCoin(book.PriceDenom, sdk.NewInt(int64(liquidation.Amount*liquidation.Price))))
+		// coins := sdk.NewCoins(sdk.NewCoin(book.PriceDenom, sdk.NewInt(int64(liquidation.Amount*liquidation.Price))))
+		coins := sdk.NewCoins(sdk.NewCoin(book.PriceDenom, sdk.NewInt(int64(liquidation.Amount*remainingBuyOrder.Price))))
 		if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, creatorAddr, coins); err != nil {
 			return err
 		}
