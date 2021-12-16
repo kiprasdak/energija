@@ -55,7 +55,7 @@
                 v-model="description"
                 type="text"
                 maxlength="96"
-                placeholder="Protingo skaitliuko aprašymas"
+                placeholder="Energijos talpos aprašymas"
               />
             </div>
           </div>
