@@ -84,6 +84,14 @@
               >
                 Vertė
               </div>
+              <div
+                class="
+                  sp-bold
+                  sp-token-send__main__rcpt__input
+                  sp-form-group
+                  flex-child
+                "
+              ></div>
               <!-- <div>
                 <SpButton
                   @click="closeAllOrders"
