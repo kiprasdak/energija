@@ -84,7 +84,7 @@
               >
                 Vertė
               </div>
-              <div>
+              <!-- <div>
                 <SpButton
                   @click="closeAllOrders"
                   target="_blank"
@@ -92,7 +92,7 @@
                   :disabled="false"
                   >Atšaukti visus</SpButton
                 >
-              </div>
+              </div>-->
             </div>
             <div
               id="buyOrderList"
