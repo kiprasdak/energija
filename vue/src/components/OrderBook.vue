@@ -315,7 +315,7 @@ export default {
       await this.createTradingPair();
       const buyOrders = await this.getBuyOrders();
       var buyOrdersArray = [];
-      buyOrders.buyOrderBook.book.orders.reverse().forEach((order) => {
+      buyOrders.buyOrderBook.book.orders.forEach((order) => {
         if (buyOrdersArray.length < 10) {
           buyOrdersArray.push([order.amount, order.price]);
         } else {
